@@ -31,13 +31,13 @@
         <div class="row mt-2">
             <div class="col-md-6">
                 <label for="plat_motor">Pilih Motor</label>
-                <select name="plat_motor" id="plat_motor" class="form-control @error('plat_motor') is-invalid @enderror">
+                <select name="plat_motor" id="plat_motor" class="form-control plat_motor2 @error('plat_motor') is-invalid @enderror">
                         <option value="">--Pilih Motor--</option>
                     @foreach ($motors as $motor)
                         @if ($motor->status == 'tersedia' || $motor->status == 1)
                             <option value="{{ $motor->plat_motor }}" data-harga="{{ $motor->harga_sewa }}" @if (old('plat_motor') == $motor->plat_motor)
                                 selected
-                            @endif>{{ $motor->nama_motor }}  ( {{ $motor->plat_motor }} )</option>
+                            @endif>{{ $motor->nama_motor }} {{$motor->warna}}  ( {{ $motor->plat_motor }} )</option>
                         @endif
                     @endforeach
                 </select>

@@ -10,7 +10,7 @@
     <div class="border p-3 rounded">
         <div class="form-group mt-2">
             <label for="no_paspor">No Paspor</label>
-            <input type="text" class="form-control plat_motor2 no_paspor_input @error('no_paspor') is-invalid @enderror" id="no_paspor_input" name="no_paspor" value="{{ $transaksi->penyewa->no_paspor }}" placeholder="Masukan no paspor" required>
+            <input type="text" class="form-control  no_paspor_input @error('no_paspor') is-invalid @enderror" id="no_paspor_input" name="no_paspor" value="{{ $transaksi->penyewa->no_paspor }}" placeholder="Masukan no paspor" required>
             @error('no_paspor')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -99,10 +99,10 @@
         <div class="row mt-2">
             <div class="col-md-6">
                 <label for="plat_motor">Pilih Motor</label>
-                <select name="plat_motor" id="plat_motor" class="form-control @error('plat_motor') is-invalid @enderror">
+                <select name="plat_motor" id="plat_motor" class="form-control plat_motor2 @error('plat_motor') is-invalid @enderror">
                         <option value="">--Pilih Motor--</option>
                     @foreach ($motors as $motor)
-                            <option value="{{ $motor->plat_motor }}" data-harga="{{ $motor->harga_sewa }}" {{ (old('plat_motor', $motor->plat_motor) == $motor->plat_motor ? 'selected' : '') }}>{{ $motor->nama_motor }}  ( {{ $motor->plat_motor }} )</option>
+                            <option value="{{ $motor->plat_motor }}" data-harga="{{ $motor->harga_sewa }}" {{ (old('plat_motor', $motor->plat_motor) == $motor->plat_motor ? 'selected' : '') }}>{{ $motor->nama_motor }} {{$motor->warna}}  ( {{ $motor->plat_motor }} )</option>
                     @endforeach
                 </select>
                 @error('plat_motor')
