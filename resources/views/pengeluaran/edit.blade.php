@@ -8,7 +8,7 @@
     <div class="border p-3 rounded">
         <div class="form-group mt-2">
             <label for="plat_motor">Plat Motor</label>
-            <select class="form-control @error('plat_motor') is-invalid @enderror" id="plat_motor" name="plat_motor" required>
+            <select class="form-control plat_motor2 @error('plat_motor') is-invalid @enderror" id="plat_motor" name="plat_motor" required>
                 <option value="">Pilih plat motor</option>
                 @foreach($motors as $motor)
                 <option value="{{ $motor->plat_motor }}" @if($pengeluaran->plat_motor == $motor->plat_motor) selected @endif>{{ $motor->nama_motor }} {{ $motor->plat_motor }}</option>
