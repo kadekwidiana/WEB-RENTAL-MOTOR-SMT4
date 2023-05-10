@@ -47,7 +47,7 @@ class MotorController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'plat_motor' => 'required|string|max:10|unique:motors',
+            'plat_motor' => 'required|string|max:15|unique:motors',
             'nama_motor' => 'required|string|max:20',
             'warna' => 'required|in:merah,kuning,hijau,biru,hitam,putih',
             'tipe' => 'required',

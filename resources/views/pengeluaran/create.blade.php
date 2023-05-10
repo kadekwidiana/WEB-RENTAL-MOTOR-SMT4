@@ -11,7 +11,7 @@
                     @error('plat_motor')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror --}}
-                    <select class="form-control @error('plat_motor') is-invalid @enderror" id="plat_motor" name="plat_motor" required>
+                    <select class="form-control plat_motor2 @error('plat_motor') is-invalid @enderror" id="plat_motor" name="plat_motor" required>
                         <option value="">Pilih plat motor</option>
                         @foreach($motors as $motor)
                             <option value="{{ $motor->plat_motor }}">{{ $motor->nama_motor }}  {{ $motor->plat_motor }}</option>

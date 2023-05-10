@@ -7,7 +7,7 @@
     <div class="border p-3 rounded mt-3">
         <div class="form-group">
             <label for="no_paspor">Nama Penyewa</label>
-            <select name="no_paspor" id="no_paspor" class="form-control @error('no_paspor') is-invalid @enderror">
+            <select name="no_paspor" id="no_paspor" class="form-control plat_motor2 @error('no_paspor') is-invalid @enderror">
                 <option value="">--Pilih penyewa--</option>
                 @foreach ($penyewas as $penyewa)
                     <option value="{{ $penyewa->no_paspor }}">{{ $penyewa->nama_penyewa }} ({{ $penyewa->no_paspor }})</option>

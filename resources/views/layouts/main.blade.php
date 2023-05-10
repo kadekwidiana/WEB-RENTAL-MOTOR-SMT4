@@ -55,9 +55,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
         <script>
             $(document).ready(function() {
-                $('#plat_motor').select2();
+                $('.plat_motor2').select2();
                 // Event listener untuk perubahan pilihan pada select
-                $('#plat_motor').on('change', function() {
+                $('.plat_motor2').on('change', function() {
                     // Ambil harga sewa dari atribut data-harga pada opsi yang dipilih
                     var harga = $('option:selected', this).data('harga');
                     // Isi harga sewa pada input harga sewa
