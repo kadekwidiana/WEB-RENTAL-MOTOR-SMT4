@@ -51,6 +51,14 @@
                                         <input id="warna_kuning" type="radio" class="form-check-input @error('warna') is-invalid @enderror" name="warna" value="kuning" {{ $motor->warna == 'kuning' ? 'checked' : '' }} required>
                                         <label class="form-check-label" for="warna_kuning">Kuning</label>
                                     </div>
+                                    <div class="form-check form-check-inline">
+                                        <input id="warna_merah" type="radio" class="form-check-input @error('warna') is-invalid @enderror" name="warna" value="hitam" {{ $motor->warna == 'hitam' ? 'checked' : '' }} required auto>
+                                        <label class="form-check-label" for="warna_biru">Hitam</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input id="warna_merah" type="radio" class="form-check-input @error('warna') is-invalid @enderror" name="warna" value="putih" {{ $motor->warna == 'putih' ? 'checked' : '' }} required auto>
+                                        <label class="form-check-label" for="warna_biru">Putih</label>
+                                    </div>
                                 </div>
                                     @error('warna')
                                         <span class="invalid-feedback" role="alert">

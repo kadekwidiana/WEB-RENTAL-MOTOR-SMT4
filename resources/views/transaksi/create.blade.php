@@ -110,7 +110,7 @@
                         @if ($motor->status == 'tersedia' || $motor->status == 1)
                             <option value="{{ $motor->plat_motor }}" data-harga="{{ $motor->harga_sewa }}" @if (old('plat_motor') == $motor->plat_motor)
                                 selected
-                            @endif>{{ $motor->nama_motor }}  ( {{ $motor->plat_motor }} )</option>
+                            @endif>{{ $motor->nama_motor }} {{$motor->warna}}  ( {{ $motor->plat_motor }} )</option>
                         @endif
                     @endforeach
                 </select>
