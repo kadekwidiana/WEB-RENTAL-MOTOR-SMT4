@@ -5,6 +5,9 @@
         @can('manajer')
           <a href="{{ route('motor.create') }}" class="btn btn-primary mb-3">Tambah Motor</a>
         @endcan
+        @can('owner')
+          <a href="{{ route('motor.create') }}" class="btn btn-primary mb-3">Tambah Motor</a>
+        @endcan
         <table class="table">
         </div>   
             <div class="mt-3 justify-content-center">
@@ -12,7 +15,7 @@
                   <div class="row">
                     <div class="col">
                       <div class="input-group mb-3">
-                        <input type="text" value="" class="form-control" placeholder="Cari data Motor...." name="search">
+                        <input type="text" value="{{ Request::input('search') }}" class="form-control" placeholder="Cari data Motor...." name="search" id="search">
                       </div>
                     </div>
                     <div class="col-1">
@@ -20,6 +23,7 @@
                     </div>
                   </div>
                 </form>
+                
               </div>
             <thead>
                 <table class="table table-bordered text-center">
@@ -64,6 +68,19 @@
                                 </a>
                                 
                                 @can('manajer')
+                                <a href="{{ route('motor.edit', $motor->plat_motor) }}" class="btn btn-sm btn-success me-2" title="Edit">
+                                  Edit
+                              </a>
+                              <form action="{{ route('motor.destroy', $motor->plat_motor) }}" method="POST" class="d-inline">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus motor ini?')" title="Hapus">
+                                      Hapus
+                                  </button>
+                              </form>
+                                @endcan
+
+                                @can('owner')
                                 <a href="{{ route('motor.edit', $motor->plat_motor) }}" class="btn btn-sm btn-success me-2" title="Edit">
                                   Edit
                               </a>
@@ -121,6 +138,8 @@
         </table>
     </div>
 
-    
+    <div class="d-flex justify-content-end mt-2">
+        {{ $motors->links() }}
+    </div>
   
 @endsection

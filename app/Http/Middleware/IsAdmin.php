@@ -16,7 +16,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->check() || !in_array(auth()->user()->is_admin, [2, 3]) || auth()->user()->status !== 1) {
+        if (!auth()->check() || !in_array(auth()->user()->is_admin, [1, 2, 3]) || auth()->user()->status !== 1) {
             abort(403);
         }
 

@@ -18,7 +18,16 @@ class MotorController extends Controller
      */
     public function index(Request $request)
     {
-        $motors = Motor::all();
+        $paginate = $request->paginate;
+        $search = $request->search;
+        $motors = Motor::where('nama_motor', 'like', '%' . $search . '%')
+            ->orWhere('plat_motor', 'like', '%' . $search . '%')
+            ->orWhere('status', 'like', '%' . $search . '%')
+            ->orWhere('tipe', 'like', '%' . $search . '%')
+            ->orWhere('tgl_catat', 'like', '%' . $search . '%')
+            ->latest()
+            ->paginate(10);
+        // $motors = Motor::all();
         return view('motor.index', [
             'title' => 'Data Motor',
             'active' => 'Motor'
