@@ -11,11 +11,27 @@ use App\Models\User;
 
 class TransaksiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $totalTransaksi = Transaksi::sum('total');
-        
-        $transaksis = Transaksi::with('motor', 'penyewa', 'user')->get();
+        $search = $request->search;
+        $transaksis = Transaksi::with('motor', 'penyewa', 'user')
+            ->orWhere('kode_transaksi', 'like', '%' . $search . '%')
+            ->orWhere('plat_motor', 'like', '%' . $search . '%')
+            ->orWhere(function ($query) use ($search) {
+                $query->where('plat_motor', 'like', '%' . $search . '%')
+                    ->orWhereHas('motor', function ($query) use ($search) {
+                        $query->where('nama_motor', 'like', '%' . $search . '%');
+                    });
+            })
+            ->orWhere(function ($query) use ($search) {
+                $query->where('no_paspor', 'like', '%' . $search . '%')
+                    ->orWhereHas('penyewa', function ($query) use ($search) {
+                        $query->where('nama_penyewa', 'like', '%' . $search . '%');
+                    });
+            })
+            ->latest()
+            ->paginate(10);
         return view('transaksi.index', [
             'title' => 'Data Transaksi',
             'active' => 'Transaksi'

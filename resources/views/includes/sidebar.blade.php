@@ -18,7 +18,7 @@
                     </a>
                     <div class="collapse" id="collaps2" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link collapsed {{ ($active === "Motor") ? 'active' : '' }}" href="/motors">
+                            <a class="nav-link collapsed {{ ($active === "Motor") ? 'active' : '' }}" href="/motor">
                                 Data Motor
                             </a>
                         </nav>

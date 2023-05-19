@@ -35,7 +35,7 @@
 
         <div class="form-group mt-2">
             <label for="jenis_pengeluaran">Jenis Pengeluaran</label>
-            <input class="form-control @error('jenis_pengeluaran') is-invalid @enderror" id="jenis_pengeluaran" name="jenis_pengeluaran" type="text" required value="{{ $pengeluaran->jenis_pengeluaran }}" placeholder="Masukkan Jenis Pengeluaran">
+            <textarea class="form-control" name="jenis_pengeluaran" id="jenis_pengeluaran" cols="10" rows="5" placeholder="Masukan jenis pengeluaran" required>{{ $pengeluaran->jenis_pengeluaran }}</textarea>
             @error('jenis_pengeluaran')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror

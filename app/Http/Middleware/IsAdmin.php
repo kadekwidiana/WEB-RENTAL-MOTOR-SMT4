@@ -17,7 +17,8 @@ class IsAdmin
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->check() || !in_array(auth()->user()->is_admin, [1, 2, 3]) || auth()->user()->status !== 1) {
-            abort(403);
+            return response()->view('auth.login', ['message' => 'Anda belum disetujui oleh owner']);
+            // abort(401);
         }
 
         return $next($request);

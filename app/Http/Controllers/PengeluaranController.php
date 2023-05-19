@@ -9,10 +9,19 @@ use App\Models\User;
 
 class PengeluaranController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $totalPengeluaran = Pengeluaran::sum('biaya_pengeluaran');
-        $pengeluarans = Pengeluaran::all();
+        $search = $request->search;
+        $pengeluarans = Pengeluaran::where(function ($query) use ($search) {
+            $query->where('plat_motor', 'like', '%' . $search . '%')
+                ->orWhereHas('motor', function ($query) use ($search) {
+                    $query->where('nama_motor', 'like', '%' . $search . '%');
+                });
+        })
+            ->orWhere('jenis_pengeluaran', 'like', '%' . $search . '%')
+            ->latest()
+            ->paginate(10);
 
         return view('pengeluaran.index', [
             'title' => 'Pengeluaran',

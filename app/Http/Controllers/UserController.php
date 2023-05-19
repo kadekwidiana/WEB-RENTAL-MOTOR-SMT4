@@ -9,9 +9,15 @@ use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pegawais = User::all();
+        // $pegawais = User::all();
+        $search = $request->search;
+        $pegawais = User::where('nama_pegawai', 'like', '%' . $search . '%')
+            ->orWhere('username', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%')
+            ->orWhere('alamat', 'like', '%' . $search . '%')
+            ->paginate(10);
 
         return view('pegawai.index', [
             'title' => 'Operator & Pegawai',

@@ -16,9 +16,17 @@ class PenyewaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $penyewas = Penyewa::all();
+        // $penyewas = Penyewa::all();
+        $search = $request->search;
+        $penyewas = Penyewa::where('nama_penyewa', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%')
+            ->orWhere('asal_negara', 'like', '%' . $search . '%')
+            ->orWhere('jenis_kelamin', 'like', '%' . $search . '%')
+            ->orWhere('domisili', 'like', '%' . $search . '%')
+            ->latest()
+            ->paginate(10);
         return view('penyewa.index', [
             'title' => 'Data Penyewa',
             'active' => 'Penyewa'

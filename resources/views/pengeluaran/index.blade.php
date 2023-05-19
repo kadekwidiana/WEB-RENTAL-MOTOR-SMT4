@@ -4,28 +4,26 @@
     <div class="container">
         {{-- <h1>Daftar Motor</h1> --}}
         <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary mb-3">Tambah Pengeluaran</a>
-        <table class="table">
-        </div>   
-            <div class="mt-3 justify-content-center">
-                <form action="{{ route('pengeluaran.index') }}" method="GET">
-                  <div class="row">
-                    <div class="col">
-                      <div class="input-group mb-3">
-                        <input type="text" value="" class="form-control" placeholder="Cari data Motor...." name="search">
-                      </div>
-                    </div>
-                    <div class="col-1">
-                    <button class="btn btn-secondary" type="submit">Cari</button>
-                    </div>
-                  </div>
-                </form>
+        <div class="mt-3 justify-content-center">
+          <form action="{{ route('pengeluaran.index') }}" method="GET">
+            <div class="row">
+              <div class="col">
+                <div class="input-group mb-3">
+                  <input type="text" value="{{ request('search') }}" class="form-control" placeholder="Cari data pengeluaran...." name="search">
+                </div>
               </div>
+              <div class="col-1">
+              <button class="btn btn-secondary" type="submit">Cari</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <table class="table table-bordered">
+        </div>   
             <thead>
-                <table class="table table-bordered text-center">
-                <tr>
-            <th>ID Pengeluaran</th>
+            <th>No.</th>
             <th>Motor</th>
-            <th>ID Pegawai</th>
+            <th>Pegawai</th>
             <th>Tanggal Pengeluaran</th>
             <th>Jenis Pengeluaran</th>
             <th>Biaya Pengeluaran</th>
@@ -35,9 +33,9 @@
     <tbody>
         @foreach ($pengeluarans as $pengeluaran)
             <tr>
-                <td>{{ $pengeluaran->id_pengeluaran }}</td>
-                <td>{{ $pengeluaran->plat_motor }}</td>
-                <td>{{ $pengeluaran->id_pegawai }}</td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $pengeluaran->motor->nama_motor }}  {{ $pengeluaran->plat_motor }}</td>
+                <td>{{ $pengeluaran->pegawai->nama_pegawai }}</td>
                 <td>{{ date('d F Y', strtotime($pengeluaran->tgl_pengeluaran)) }}</td>
                 <td>{{ $pengeluaran->jenis_pengeluaran }}</td>
                 <td>{{ number_format($pengeluaran->biaya_pengeluaran, 0, ',', '.') }}</td>
@@ -67,7 +65,8 @@
                   </div>
                   <div class="modal-body">
                     <p><strong>Id Pengeluaran : </strong>{{ $pengeluaran->id_pengeluaran }}</p>
-                    <p><strong>Plat Motor : </strong>{{ $pengeluaran->plat_motor }}</p>
+                    <p><strong>Motor : </strong>{{ $pengeluaran->motor->nama_motor }}  {{ $pengeluaran->plat_motor }}</p>
+                    <p><strong>Pegawai : </strong>{{ $pengeluaran->pegawai->nama_pegawai }}</p>
                     <p><strong>Tanggal Pengeluaran : </strong>{{ date('d F Y', strtotime($pengeluaran->tgl_pengeluaran)) }}</p>
                     <p><strong>Jenis Pengeluaran : </strong>{{ $pengeluaran->jenis_pengeluaran }}</p>
                     <p><strong>Biaya Pengeluaran : </strong>Rp. {{ number_format($pengeluaran->biaya_pengeluaran, 0, ',', '.') }}</p>
@@ -81,6 +80,13 @@
         @endforeach
     </tbody>
 </table>
+  @empty($pengeluaran)
+    <div class="text-center" style="font-weight: bold">
+      <h5 style="font-weight: bold">Data pengeluaran tidak ada</h5>
+      <a href="{{ route('pengeluaran.create') }}" class="">Tambah ?</a>
+    </div>
+  @endempty
 <p><strong>Total Pengeluaran : </strong>Rp. {{ number_format($totalPengeluaran, 0, ',', '.') }}</p>
 </div>
+
 @endsection

@@ -9,7 +9,12 @@ class FrontPageController extends Controller
 {
     public function viewMotor(Request $request)
     {
-        $motors = Motor::all();
+        $search = $request->search;
+        $motors = Motor::where('nama_motor', 'like', '%' . $search . '%')
+            ->orWhere('status', 'like', '%' . $search . '%')
+            ->orWhere('tipe', 'like', '%' . $search . '%')
+            ->latest()
+            ->paginate(6);
         return view('frontpage.motors', [
             'title' => 'Motor',
             'active' => 'Motor'
@@ -18,7 +23,9 @@ class FrontPageController extends Controller
 
     public function viewHome(Request $request)
     {
-        $motors = Motor::all();
+        $search = $request->search;
+        $motors = Motor::where('nama_motor', 'like', '%' . $search . '%')
+            ->paginate(6);
         return view('frontpage.home', [
             'title' => 'Home',
             'active' => 'Home'

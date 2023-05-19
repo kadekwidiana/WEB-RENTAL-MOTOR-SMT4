@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col">
           <div class="input-group mb-3">
-            <input type="text" value="" class="form-control" placeholder="Cari data pegawai...." name="search">
+            <input type="text" value="{{ Request::input('search') }}" class="form-control" placeholder="Cari data pegawai...." name="search">
           </div>
         </div>
         <div class="col-1">
@@ -132,4 +132,7 @@
     </tbody>
   </table>
 
+  <div class="d-flex justify-content-end mt-2">
+    {{ $pegawais->links() }}
+  </div>
 @endsection

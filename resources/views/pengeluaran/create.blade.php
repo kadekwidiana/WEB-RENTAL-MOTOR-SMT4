@@ -33,14 +33,14 @@
 
                 <div class="form-group mt-2">
                     <label for="tgl_pengeluaran">Tanggal Pengeluaran</label>
-                    <input type="date" class="form-control @error('tgl_pengeluaran') is-invalid @enderror" id="tgl_pengeluaran" name="tgl_pengeluaran" value="{{ old('tgl_pengeluaran') }}" required>
+                    <input type="date" class="form-control @error('tgl_pengeluaran') is-invalid @enderror" id="tgl_pengeluaran" name="tgl_pengeluaran" value="{{ old('tgl_pengeluaran') ?: date('Y-m-d') }}" required>
                     @error('tgl_pengeluaran')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div> 
                 <div class="form-group mt-2">
                     <label for="jenis_pengeluaran">Jenis Pengeluaran</label>
-                    <input class="form-control @error('jenis_pengeluaran') is-invalid @enderror" id="jenis_pengeluaran" name="jenis_pengeluaran" type="text" required value="{{ old('jenis_pengeluaran') }}" placeholder="Masukkan Jenis Pengeluaran" required>
+                    <textarea class="form-control" name="jenis_pengeluaran" id="jenis_pengeluaran" cols="10" rows="5" placeholder="Masukan jenis pengeluaran" required>{{ old('jenis_pengeluaran') }}</textarea>
                     @error('jenis_pengeluaran')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

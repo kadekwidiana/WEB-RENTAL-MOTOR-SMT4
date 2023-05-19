@@ -4,24 +4,26 @@
 <form method="POST" action="{{ route('transaksi.update', $transaksi->kode_transaksi) }}">
     @csrf
     @method('PUT')
-    
-    {{-- NEW --}}
-    {{-- INPUT DATA PENYEWA --}}
-    <div class="border p-3 rounded">
-        <div class="form-group mt-2">
-            <label for="no_paspor">No Paspor</label>
-            <input type="text" class="form-control  no_paspor_input @error('no_paspor') is-invalid @enderror" id="no_paspor_input" name="no_paspor" value="{{ $transaksi->penyewa->no_paspor }}" placeholder="Masukan no paspor" required>
-            @error('no_paspor')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+     {{-- INPUT PENYEWA --}}
+     <div class="border p-3 rounded">
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <label for="no_paspor">No Paspor</label>
+                <input type="text" class="form-control no_paspor_input @error('no_paspor') is-invalid @enderror" id="no_paspor_input" name="no_paspor" value="{{ $transaksi->penyewa->no_paspor }}" placeholder="Masukan no paspor" required readonly>
+                @error('no_paspor')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            
+            <div class="col-md-6">
+                <label for="nama_penyewa">Nama Penyewa</label>
+                <input type="text" class="form-control @error('nama_penyewa') is-invalid @enderror" id="nama_penyewa" name="nama_penyewa" value="{{ $transaksi->penyewa->nama_penyewa }}" placeholder="Masukan nama penyewa" required>
+                @error('nama_penyewa')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
-        <div class="form-group mt-2">
-            <label for="nama_penyewa">Nama Penyewa</label>
-            <input type="text" class="form-control @error('nama_penyewa') is-invalid @enderror" id="nama_penyewa" name="nama_penyewa" value="{{ $transaksi->penyewa->nama_penyewa }}" placeholder="Masukan nama penyewa" required>
-            @error('nama_penyewa')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+        
         <div class="form-group mt-2">
             <label for="">Jenis Kelamin</label>
             <div>
@@ -38,19 +40,21 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
-        <div class="form-group mt-2">
-            <label for="asal_negara">Asal Negara</label>
-            <input type="text" class="form-control @error('asal_negara') is-invalid @enderror" id="asal_negara" name="asal_negara" value="{{ $transaksi->penyewa->asal_negara }}" placeholder="Masukan asal negara" required>
-            @error('asal_negara')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="form-group mt-2">
-            <label for="domisili">Alamat Domisili</label>
-            <input type="text" class="form-control @error('domisili') is-invalid @enderror" id="domisili" name="domisili" value="{{ $transaksi->penyewa->domisili }}" placeholder="Masukan tempat tinggal saat ini" required>
-            @error('domisili')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <label for="asal_negara">Asal Negara</label>
+                <input type="text" class="form-control @error('asal_negara') is-invalid @enderror" id="asal_negara" name="asal_negara" value="{{ $transaksi->penyewa->asal_negara }}" placeholder="Masukan asal negara" required>
+                @error('asal_negara')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-md-6">
+                <label for="domisili">Alamat Domisili</label>
+                <input type="text" class="form-control @error('domisili') is-invalid @enderror" id="domisili" name="domisili" value="{{ $transaksi->penyewa->domisili }}" placeholder="Masukan tempat tinggal saat ini" required>
+                @error('domisili')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
         <div class="row mt-2">
             <div class="col-md-6">
@@ -77,6 +81,7 @@
             @enderror
         </div>
     </div>
+
     {{-- untuk mengisi no_paspor yang di dapatkan dari no_paspor penyewa --}}
     <div class="form-group mt-2 d-none">
         <label for="no_paspor">No Paspor</label>
@@ -86,7 +91,7 @@
         @enderror
     </div>
 
-    {{-- Input Transaksi --}}
+    {{-- INPUT TRANSAKSI --}}
     <div class="border p-3 rounded mt-3">
         <div class="form-group mt-2">
             <label for="kode_transaksi">Kode Transaksi</label>

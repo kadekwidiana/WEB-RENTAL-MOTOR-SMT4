@@ -33,7 +33,9 @@ Route::middleware('auth',)->group(function () {
         Route::post('/transaksi/{kode_transaksi}/pengembalian', [TransaksiController::class, 'pengembalian'])->name('transaksi.pengembalian');
         Route::get('/transaksi/create/data-transaksi', [TransaksiController::class, 'viewadd'])->name('transaksi.viewadd');
         Route::post('/transaksi/create/data-transaksi', [TransaksiController::class, 'tambah'])->name('transaksi.tambah');
-        Route::get('/motors', [MotorController::class, 'index'])->name('motor.index');
+        // Route::get('/motors', [MotorController::class, 'index'])->name('motor.index');
+        // Kelola motor
+        Route::resource('/motor', MotorController::class);
         // Penyewa
         Route::resource('/penyewa', PenyewaController::class);
         // Pengeluaran
@@ -41,8 +43,7 @@ Route::middleware('auth',)->group(function () {
 
         // >= MANAJER
         Route::middleware('manajer')->group(function () {
-            // Kelola motor
-            Route::resource('/motor', MotorController::class);
+
             // Pengeluaran
             Route::resource('/pengeluaran', PengeluaranController::class);
             // Kelola pegawai

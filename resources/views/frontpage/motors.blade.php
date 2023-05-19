@@ -15,7 +15,12 @@
 <section class="ftco-section bg-light">
 	<div class="container">
 		<div class="row">
-
+            <form action="{{ route('frontpage.motors') }}" method="GET" class="">
+                <div class="input-group mb-3">
+                    <input value="{{ Request::input('search') }}" class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" name="search" id="search"/>
+                    <button class="btn btn-secondary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+              </form>
             @foreach ($motors as $motor)
             <div class="col-md-4">
                 <div class="car-wrap rounded ftco-animate">
@@ -78,8 +83,11 @@
             </div>
             @endforeach
 			  
-			  
+			<div class="d-flex justify-content-end mt-2">
+                {{ $motors->links() }}
+            </div>
 	    </div>
 	</div>
 </section>
+
 @endsection

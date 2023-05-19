@@ -7,6 +7,8 @@ use App\Models\Transaksi;
 use App\Models\Pengeluaran;
 use App\Models\Motor;
 use App\Models\User;
+use App\Models\Penyewa;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -17,11 +19,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $bulan = Carbon::now();
+
         $totalPendapatan = Transaksi::sum('total');
         $totalPengeluaran = Pengeluaran::sum('biaya_pengeluaran');
 
         $totalMotor = Motor::count();
         $totalPegawai = User::count();
+        $totalPenyewa = Penyewa::count();
         $totalPengeluaranMotor = Pengeluaran::count();
         $totalTransaksi = Transaksi::count();
 
@@ -43,7 +48,7 @@ class DashboardController extends Controller
             'active' => 'Dashboard'
         ], compact(
             [
-                'totalPendapatan', 'totalPengeluaran', 'totalMotor', 'totalPegawai', 'totalPengeluaranMotor', 'totalTransaksi',
+                'totalPendapatan', 'totalPengeluaran', 'totalMotor', 'totalPegawai', 'totalPenyewa', 'totalPengeluaranMotor', 'totalTransaksi',
                 'totalBulanJanuari',
                 'totalBulanFebruari',
                 'totalBulanMaret',
