@@ -9,24 +9,80 @@ use App\Models\User;
 
 class PengeluaranController extends Controller
 {
+    // public function index(Request $request)
+    // {
+
+    //     $search = $request->search;
+    //     $filter = $request->filter;
+    //     // $totalPengeluaran = Pengeluaran::where(function ($query) use ($search) {
+    //     //     $query->where('plat_motor', 'like', '%' . $search . '%')
+    //     //         ->orWhereHas('motor', function ($query) use ($search) {
+    //     //             $query->where('nama_motor', 'like', '%' . $search . '%');
+    //     //         });
+    //     // })
+    //     //     ->orWhere('jenis_pengeluaran', 'like', '%' . $search . '%')
+    //     //     ->orWhere('tgl_pengeluaran', 'like', '%' . $search . '%')
+    //     //     ->sum('biaya_pengeluaran');
+
+    //     $query = Pengeluaran::where(function ($query) use ($search) {
+    //         $query->where('plat_motor', 'like', '%' . $search . '%')
+    //             ->orWhereHas('motor', function ($query) use ($search) {
+    //                 $query->where('nama_motor', 'like', '%' . $search . '%');
+    //             });
+    //     })
+    //         ->orWhere('jenis_pengeluaran', 'like', '%' . $search . '%')
+    //         ->orWhere('tgl_pengeluaran', 'like', '%' . $search . '%');
+
+    //     if ($filter) {
+    //         $query->where('tgl_pengeluaran', 'like', '%' . $filter . '%');
+    //     }
+
+    //     $pengeluarans = $query->latest()->paginate(10);
+    //     $totalPengeluaran = $query->sum('biaya_pengeluaran');
+
+    //     return view('pengeluaran.index', [
+    //         'title' => 'Pengeluaran',
+    //         'active' => 'Motor'
+    //     ], compact('pengeluarans', 'totalPengeluaran'));
+    // }
+
     public function index(Request $request)
     {
-        $totalPengeluaran = Pengeluaran::sum('biaya_pengeluaran');
-        $search = $request->search;
-        $pengeluarans = Pengeluaran::where(function ($query) use ($search) {
-            $query->where('plat_motor', 'like', '%' . $search . '%')
-                ->orWhereHas('motor', function ($query) use ($search) {
-                    $query->where('nama_motor', 'like', '%' . $search . '%');
-                });
-        })
-            ->orWhere('jenis_pengeluaran', 'like', '%' . $search . '%')
-            ->latest()
-            ->paginate(10);
+        $search = $request->input('search');
+        $filter = $request->input('filter');
+
+        $query = Pengeluaran::query();
+
+        if ($search) {
+            $query->where(function ($innerQuery) use ($search) {
+                $innerQuery->where('plat_motor', 'like', '%' . $search . '%')
+                    ->orWhereHas('motor', function ($q) use ($search) {
+                        $q->where('nama_motor', 'like', '%' . $search . '%');
+                    })
+                    ->orWhere('jenis_pengeluaran', 'like', '%' . $search . '%')
+                    ->orWhere('tgl_pengeluaran', 'like', '%' . $search . '%');
+            });
+        }
+
+        if ($filter) {
+            $query->where(function ($innerQuery) use ($filter) {
+                $innerQuery->where('plat_motor', 'like', '%' . $filter . '%')
+                    ->orWhereHas('motor', function ($q) use ($filter) {
+                        $q->where('nama_motor', 'like', '%' . $filter . '%');
+                    })
+                    ->orWhere('jenis_pengeluaran', 'like', '%' . $filter . '%')
+                    ->orWhere('tgl_pengeluaran', 'like', '%' . $filter . '%');
+            });
+        }
+
+        $totalPengeluaran = $query->sum('biaya_pengeluaran');
+
+        $pengeluarans = $query->latest()->paginate(10);
 
         return view('pengeluaran.index', [
             'title' => 'Pengeluaran',
             'active' => 'Motor'
-        ], compact('pengeluarans', 'totalPengeluaran'));
+        ])->with(compact('pengeluarans', 'totalPengeluaran'));
     }
 
     public function create()

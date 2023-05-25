@@ -9,6 +9,7 @@ use App\Http\Controllers\PenyewaController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontPageController;
+use App\Http\Controllers\Report\ReportMotorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 
@@ -54,6 +55,8 @@ Route::middleware('auth',)->group(function () {
                 Route::patch('/pegawai/{id}/update-status', [UserController::class, 'statusPegawai'])->name('pegawai.statusPegawai');
                 Route::patch('/pegawai/{id}/update', [UserController::class, 'statusNonAktif'])->name('pegawai.statusNonAktif');
                 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+                Route::get('/dashboard/report-motor', [ReportMotorController::class, 'reportMotor']);
+                Route::get('/dashboard/report-motor/{plat_motor}/detail', [ReportMotorController::class, 'detailReportMotor']);
             });
         });
 
@@ -64,5 +67,7 @@ Route::middleware('auth',)->group(function () {
 
 
 // Frontpage Rental Motor
-Route::get('/view-motor', [FrontPageController::class, 'viewMotor'])->name('frontpage.motors');
 Route::get('/', [FrontPageController::class, 'viewHome'])->name('frontpage.home');
+Route::get('/about', [FrontPageController::class, 'viewAbout'])->name('frontpage.about');
+Route::get('/view-motor', [FrontPageController::class, 'viewMotor'])->name('frontpage.motors');
+Route::get('/contact', [FrontPageController::class, 'viewContact'])->name('frontpage.contact');

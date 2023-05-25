@@ -50,6 +50,14 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required'],
             'is_admin' => 'required',
+            // validasi usia min
+            'tgl_lahir' => ['required', function ($attribute, $value, $fail) {
+                $usia = date_diff(date_create($value), date_create('today'))->y;
+
+                if ($usia < 18) {
+                    $fail('Anda harus berusia minimal 18 tahun');
+                }
+            }]
         ]);
 
         $user = User::create([

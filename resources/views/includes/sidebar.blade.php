@@ -2,7 +2,7 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <div class="sb-sidenav-menu-heading">Welcome</div>
+                <div class="sb-sidenav-menu-heading text-white">{{ date('l, d F Y') }}</div>
                 {{-- <a class="nav-link {{ ($active === "Welcome") ? 'active' : '' }}" href="/welcome">
                     <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
                     Admin

@@ -6,7 +6,7 @@
           <div class="card bg-primary text-white mb-4">
               <div class="card-body">{{ $totalMotor }} Motor</div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                  <a class="small text-white stretched-link" href="/motor">Details</a>
+                  <a class="small text-white stretched-link" href="/dashboard/report-motor">Details</a>
                   <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
           </div>

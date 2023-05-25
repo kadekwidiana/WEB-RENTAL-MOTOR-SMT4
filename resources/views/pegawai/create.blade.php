@@ -90,6 +90,9 @@
                     <select id="is_admin" name="is_admin" class="form-control @error('is_admin') is-invalid @enderror" required>
                         {{-- <option value="3" {{ old('is_admin') == 1 ? 'selected' : '' }}>Owner/Pemilik</option> --}}
                         <option value="">--Pilih posisi--</option>
+                        @can('owner')
+                        <option value="3" {{ old('is_admin') == 3 ? 'selected' : '' }}>Owner/Pemilik</option>
+                        @endcan
                         <option value="2" {{ old('is_admin') == 2 ? 'selected' : '' }}>Manager</option>
                         <option value="1" {{ old('is_admin') == 1 ? 'selected' : '' }}>Operator</option>
                     </select>
@@ -100,6 +103,7 @@
                         </span>
                         @enderror
             </div>
+
             <div class="form-group mt-3">
                 <button type="submit" class="btn btn-primary">
                     {{ __('Tambah') }}

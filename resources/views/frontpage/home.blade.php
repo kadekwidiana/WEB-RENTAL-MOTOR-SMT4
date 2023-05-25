@@ -2,21 +2,12 @@
 
 @section('content')
 <div class="hero-wrap ftco-degree-bg" style="background-image: url('assets/images/gambae.jpeg');" data-stellar-background-ratio="0.5">
-  <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
       <div class="col-lg-8 ftco-animate">
         <div class="text w-100 text-center mb-md-5 pb-md-5">
           <h1 class="mb-4">YAKIN GAK KANGEN STAYCATION DI BALI ?</h1>
           <p style="font-size: 18px;">Sewa murah motor berkualitas</p>
-          <a href="https://www.facebook.com/damarmotorbikerental/videos/297482984905205/" class="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center">
-            <div class="icon d-flex align-items-center justify-content-center">
-              <span class="ion-ios-play"></span>
-            </div>
-            <div class="heading-title ml-5">
-              <span>Yuk Sewa Motor Sekarang</span>
-            </div>
-          </a>
         </div>
       </div>
     </div>
@@ -37,16 +28,31 @@
             @foreach ($motors as $motor)
             <div class="item">
                 <div class="car-wrap rounded ftco-animate">
-                  <div class="img rounded d-flex align-items-end" style="background-image: url({{ asset('storage/' . $motor->gambar_motor) }});">
+                    @if ($motor['nama_motor'] == 'Nmax')
+                      <div class="img rounded d-flex align-items-end" style="background-image: url(../assets/images/nmax_abu.jpg);">
+                    @elseif($motor['nama_motor'] == 'Lexi')
+                      <div class="img rounded d-flex align-items-end" style="background-image: url(../assets/images/lexi.jpg);">
+                    @elseif($motor['nama_motor'] == 'Beat')
+                      <div class="img rounded d-flex align-items-end" style="background-image: url(../assets/images/beat3.jpg);">
+                    @elseif($motor['nama_motor'] == 'Scoopy')
+                      <div class="img rounded d-flex align-items-end" style="background-image: url(../assets/images/scopy_putih.jpg);">
+                    @elseif($motor['nama_motor'] == 'ADV')
+                      <div class="img rounded d-flex align-items-end" style="background-image: url(../assets/images/ADV.jpg);">
+                    @elseif($motor['nama_motor'] == 'PCX')
+                      <div class="img rounded d-flex align-items-end" style="background-image: url(../assets/images/pcx1.jpg);">
+                    @elseif($motor['nama_motor'] == 'Vario')
+                      <div class="img rounded d-flex align-items-end" style="background-image: url(../assets/images/vario.webp);">
+                    @endif
+                    
                   </div>
                   <div class="text">
-                    <h2 class="mb-0"><a href="car-single.html">{{ $motor->nama_motor }} {{ $motor->cc }} cc.</a></h2>
+                    <h2 class="mb-0"><a href="car-single.html">{{ $motor['nama_motor'] }} {{ $motor['cc'] }} cc.</a></h2>
                     <div class="d-flex mb-3">
-                        <span class="text-bold">{{ $motor->tipe }}</span>
-                        <p class="price ml-auto">Rp {{ number_format($motor->harga_sewa, 0, ',', '.') }} <span>/hari</span></p>
+                        <span class="text-bold">{{ $motor['tipe'] }}</span>
+                        <p class="price ml-auto">Rp {{ number_format($motor['harga_sewa'], 0, ',', '.') }} <span>/hari</span></p>
                     </div>
                     <div class="d-flex mb-3">
-                        @if ($motor->status == 1)
+                        @if ($motor['status'] == 1)
                             <span class="badge bg-success">Tersedia</span>
                         @else
                             <span class="badge bg-secondary">Disewakan</span>
@@ -136,20 +142,6 @@
     </div>
   </div>
 </section>
-
-<section class="ftco-section ftco-intro" style="background-image: url(assets/images/nmax4.png);">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row justify-content-end">
-      <div class="col-md-6 heading-section heading-section-white ftco-animate">
-        <h2 class="mb-3">Apakah Anda Ingin Berwisata Di Bali? Yuk Jangan Sampai kelewatan sewa sekarang.</h2>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
 
 <section class="ftco-section">
   <div class="container">

@@ -8,23 +8,47 @@
         @can('owner')
           <a href="{{ route('motor.create') }}" class="btn btn-primary mb-3">Tambah Motor</a>
         @endcan
-        <table class="table">
-        </div>   
-            <div class="mt-3 justify-content-center">
-                <form action="{{ route('motor.index') }}" method="GET">
-                  <div class="row">
-                    <div class="col">
-                      <div class="input-group mb-3">
-                        <input type="text" value="{{ Request::input('search') }}" class="form-control" placeholder="Cari data Motor...." name="search" id="search">
-                      </div>
-                    </div>
-                    <div class="col-1">
-                    <button class="btn btn-secondary" type="submit">Cari</button>
-                    </div>
-                  </div>
-                </form>
-                
+        {{-- filter/pencarian --}}
+        <div class="row mb-2">
+            <div class="col">
+              <form action="{{ route('motor.index') }}" method="GET">
+                <div class="input-group mb-3">
+                  <select name="filter" id="filter" class="form-select">
+                    <option value="">--Filter status--</option>
+                    <option value="1" {{ request('filter') == '1' ? 'selected' : '' }}>Tersedia</option>
+                    <option value="0" {{ request('filter') == '0' ? 'selected' : '' }}>Disewakan</option>
+                  </select>
+                  <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fas fa-filter"></i></button>
+                </div>
+              </form>
+            </div>
+  
+            <div class="col">
+              <form action="{{ route('motor.index') }}" method="GET">
+                <div class="input-group mb-3">
+                  <select name="filter" id="filter" class="form-select">
+                    <option value="">--Filter motor--</option>
+                    @foreach (['Beat', 'Vario', 'Nmax', 'PCX', 'Scoopy', 'Fazzio', 'ADV'] as $item)
+                      <option value="{{ $item }}" {{ request('filter') == $item ? 'selected' : ''  }}>{{ $item }}</option>
+                    @endforeach
+                    
+                  </select>
+                  <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fas fa-filter"></i></button>
+                </div>
+              </form>
+            </div>
+            {{-- Pencarian motor --}}
+            <div class="col-7">
+              <form action="{{ route('motor.index') }}" method="GET">
+              <div class="input-group mb-3">
+                <input name="search" type="text" value="{{ request('search') }}" class="form-control" placeholder="Cari...">
+                <button class="btn btn-secondary" type="submit" id="button-addon2">Cari</button>
               </div>
+            </form>
+            </div>
+            
+          </div>
+        <table class="table">
             <thead>
                 <table class="table table-bordered text-center">
                 <tr>
@@ -43,7 +67,7 @@
             <tbody>
                 @php
             $no = 1;
-        @endphp
+          @endphp
                 @foreach ($motors as $motor)
                     <tr>
                         <td>{{ $no++ }}</td>

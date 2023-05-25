@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Motor;
+use App\Models\Pengeluaran;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,16 +19,32 @@ class MotorController extends Controller
      */
     public function index(Request $request)
     {
-        $paginate = $request->paginate;
+        $filter = $request->filter;
         $search = $request->search;
-        $motors = Motor::where('nama_motor', 'like', '%' . $search . '%')
-            ->orWhere('plat_motor', 'like', '%' . $search . '%')
-            ->orWhere('status', 'like', '%' . $search . '%')
-            ->orWhere('tipe', 'like', '%' . $search . '%')
-            ->orWhere('tgl_catat', 'like', '%' . $search . '%')
-            ->latest()
-            ->paginate(10);
-        // $motors = Motor::all();
+
+        if ($search || $filter) {
+            $paginate = 50;
+        } else {
+            $paginate = 10;
+        }
+
+        $query = Motor::query();
+
+        if ($search) {
+            $query->where('nama_motor', 'like', '%' . $search . '%')
+                ->orWhere('plat_motor', 'like', '%' . $search . '%')
+                ->orWhere('status', 'like', '%' . $search . '%')
+                ->orWhere('tipe', 'like', '%' . $search . '%')
+                ->orWhere('tgl_catat', 'like', '%' . $search . '%');
+        }
+
+        if ($filter) {
+            $query->where('status', 'like', '%' . $filter . '%')
+                ->orWhere('nama_motor', 'like', '%' . $filter . '%');
+        }
+
+        $motors = $query->latest()->paginate($paginate);
+
         return view('motor.index', [
             'title' => 'Data Motor',
             'active' => 'Motor'
@@ -102,7 +119,7 @@ class MotorController extends Controller
         return view(
             'motor.edit',
             [
-                'title' => 'Data Motor',
+                'title' => 'Edit data motor',
                 'active' => 'Motor'
             ],
             compact('motor')
@@ -164,6 +181,13 @@ class MotorController extends Controller
             $transaksi->delete(); // menghapus data transaksi
         }
 
+        // Menghapus transaksi jika data motor yang ingin di hapus ada di transaksi
+        $pengeluaran = Pengeluaran::where('plat_motor', $plat_motor)->first(); // mencari data pengeluaran berdasarkan plat_motor
+        if ($pengeluaran) {
+            $pengeluaran->delete();
+
+            $pengeluaran->delete(); // menghapus data pengeluaran
+        }
 
         if ($motor->gambar_motor) {
             Storage::delete($motor->gambar_motor);

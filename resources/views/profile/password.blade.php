@@ -10,7 +10,7 @@
     @csrf()
   <div class="mb-3">
     <label for="old_password" class="form-label">Password Lama</label>
-    <input type="password" required class="form-control @error('old_password') is-invalid @enderror" name="old_password" id="old_password" >
+    <input type="password" required class="form-control @error('old_password') is-invalid @enderror" name="old_password" id="old_password" value=" {{ Auth::user()->password }}" readonly>
     @error('old_password')
     <span class="invalid-feedback">
       {{ $message }}

@@ -2,26 +2,65 @@
 
 @section('content')
     <div class="container">
-        {{-- <h1>Daftar Motor</h1> --}}
-        <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary mb-3">Tambah Pengeluaran</a>
-        <div class="mt-3 justify-content-center">
-          <form action="{{ route('pengeluaran.index') }}" method="GET">
-            <div class="row">
-              <div class="col">
-                <div class="input-group mb-3">
-                  <input type="text" value="{{ request('search') }}" class="form-control" placeholder="Cari data pengeluaran...." name="search">
-                </div>
+      <div class="d-flex mb-3">
+        <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary">Tambah Pengeluaran</a>
+      </div>
+
+        {{-- filter/pencarian --}}
+        <div class="row mb-2">
+          <div class="col">
+            <form action="{{ route('pengeluaran.index') }}" method="GET">
+              <div class="input-group mb-3">
+                <select name="filter" id="filter" class="form-select">
+                  <option value="">--Filter bulan--</option>
+                  <option value="01" {{ request('filter') == '01' ? 'selected' : '' }}>Januari</option>
+                  <option value="02" {{ request('filter') == '02' ? 'selected' : '' }}>Februari</option>
+                  <option value="03" {{ request('filter') == '03' ? 'selected' : '' }}>Maret</option>
+                  <option value="04" {{ request('filter') == '04' ? 'selected' : '' }}>April</option>
+                  <option value="05" {{ request('filter') == '05' ? 'selected' : '' }}>Mei</option>
+                  <option value="06" {{ request('filter') == '06' ? 'selected' : '' }}>Juni</option>
+                  <option value="07" {{ request('filter') == '07' ? 'selected' : '' }}>Juli</option>
+                  <option value="08" {{ request('filter') == '08' ? 'selected' : '' }}>Agustus</option>
+                  <option value="09" {{ request('filter') == '09' ? 'selected' : '' }}>September</option>
+                  <option value="10" {{ request('filter') == '10' ? 'selected' : '' }}>Oktober</option>
+                  <option value="11" {{ request('filter') == '11' ? 'selected' : '' }}>November</option>
+                  <option value="12" {{ request('filter') == '12' ? 'selected' : '' }}>Desember</option>
+                </select>
+                <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fas fa-filter"></i></button>
               </div>
-              <div class="col-1">
-              <button class="btn btn-secondary" type="submit">Cari</button>
+            </form>
+          </div>
+
+          <div class="col">
+            <form action="{{ route('pengeluaran.index') }}" method="GET">
+              <div class="input-group mb-3">
+                <select name="filter" id="filter" class="form-select">
+                  <option value="">--Filter motor--</option>
+                  @foreach (['Beat', 'Vario', 'Nmax', 'PCX', 'Scoopy', 'Fazzio', 'ADV'] as $item)
+                    <option value="{{ $item }}" {{ request('filter') == $item ? 'selected' : ''  }}>{{ $item }}</option>
+                  @endforeach
+                  
+                </select>
+                <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fas fa-filter"></i></button>
               </div>
+            </form>
+          </div>
+          {{-- Pencarian pengeluaran --}}
+          <div class="col-7">
+            <form action="{{ route('pengeluaran.index') }}" method="GET">
+            <div class="input-group mb-3">
+              <input name="search" type="text" value="{{ request('search') }}" class="form-control" placeholder="Cari...">
+              <button class="btn btn-secondary" type="submit" id="button-addon2">Cari</button>
             </div>
           </form>
+          </div>
+          
         </div>
+
         <table class="table table-bordered">
         </div>   
             <thead>
-            <th>No.</th>
+            <th>No.</th> 
             <th>Motor</th>
             <th>Pegawai</th>
             <th>Tanggal Pengeluaran</th>
@@ -80,6 +119,10 @@
         @endforeach
     </tbody>
 </table>
+
+<div class="d-flex justify-content-end mt-2">
+  {{ $pengeluarans->links() }}
+</div>
   @empty($pengeluaran)
     <div class="text-center" style="font-weight: bold">
       <h5 style="font-weight: bold">Data pengeluaran tidak ada</h5>

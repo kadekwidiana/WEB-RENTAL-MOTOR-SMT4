@@ -125,7 +125,7 @@
         
         <div class="form-group mt-2">
             <label for="id_pegawai">Operator/Pegawai</label>
-            <select name="id_pegawai" id="id_pegawai" class="form-control @error('id_pegawai') is-invalid @enderror">
+            <select name="id_pegawai" id="id_pegawai" class="form-control @error('id_pegawai') is-invalid @enderror" @readonly(true)>
                     <option value="{{ $transaksi->id_pegawai }}">{{ $transaksi->user->nama_pegawai }} </option>
             </select>
             @error('id_pegawai')

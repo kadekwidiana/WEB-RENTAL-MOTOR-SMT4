@@ -1,6 +1,6 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html">Rental Motor</a>
+    <a class="navbar-brand ps-3" href="/">Admin Rental Motor</a>
     <!-- Sidebar Toggle-->
     <button class="order-1 btn btn-link btn-sm order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
@@ -20,7 +20,8 @@
                 <li><a class="dropdown-item" href="{{ route('profile') }}">Edit Profile</a></li>
                 <li><a class="dropdown-item" href="{{ route('change-password') }}">Ganti Password</a></li>
                 <li><hr class="dropdown-divider" /></li>
-                
+                <li><a class="dropdown-item" href="/">Kembali</a></li>
+                <li><hr class="dropdown-divider" /></li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
