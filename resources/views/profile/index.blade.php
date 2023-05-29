@@ -38,7 +38,7 @@
     <span class="invalid-feedback">{{ $message }}</span>
     @enderror
   </div>
-  <div class="mb-3">
+  {{-- <div class="mb-3">
     <label for="email" class="form-label">Email</label>
     <input type="email" required class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email', $data->email) }}">
     @error('email')
@@ -46,7 +46,7 @@
       {{ $message }}
     </span>
     @enderror
-  </div>
+  </div> --}}
   <div class="d-flex justify-content-end">
     <button type="submit" class="btn btn-success">Update</button>
   </div>

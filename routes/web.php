@@ -34,9 +34,9 @@ Route::middleware('auth',)->group(function () {
         Route::post('/transaksi/{kode_transaksi}/pengembalian', [TransaksiController::class, 'pengembalian'])->name('transaksi.pengembalian');
         Route::get('/transaksi/create/data-transaksi', [TransaksiController::class, 'viewadd'])->name('transaksi.viewadd');
         Route::post('/transaksi/create/data-transaksi', [TransaksiController::class, 'tambah'])->name('transaksi.tambah');
-        // Route::get('/motors', [MotorController::class, 'index'])->name('motor.index');
-        // Kelola motor
-        Route::resource('/motor', MotorController::class);
+        // Melihat data motor
+        // Route::resource('/motor', MotorController::class);
+        Route::get('/motor', [MotorController::class, 'index'])->name('motor.index');
         // Penyewa
         Route::resource('/penyewa', PenyewaController::class);
         // Pengeluaran
@@ -44,6 +44,12 @@ Route::middleware('auth',)->group(function () {
 
         // >= MANAJER
         Route::middleware('manajer')->group(function () {
+            // Kelola data motor
+            Route::get('/motor/create', [MotorController::class, 'create'])->name('motor.create');
+            Route::post('/motor', [MotorController::class, 'store'])->name('motor.store');
+            Route::get('/motor/{plat_motor}/edit', [MotorController::class, 'edit'])->name('motor.edit');
+            Route::put('/motor/{plat_motor}', [MotorController::class, 'update'])->name('motor.update');
+            Route::delete('/motor/{plat_motor}', [MotorController::class, 'destroy'])->name('motor.destroy');
 
             // Pengeluaran
             Route::resource('/pengeluaran', PengeluaranController::class);
