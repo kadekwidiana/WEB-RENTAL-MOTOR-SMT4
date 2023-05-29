@@ -13,18 +13,18 @@
               <div class="input-group mb-3">
                 <select name="filter" id="filter" class="form-select">
                   <option value="">--Filter bulan--</option>
-                  <option value="01" {{ request('filter') == '01' ? 'selected' : '' }}>Januari</option>
-                  <option value="02" {{ request('filter') == '02' ? 'selected' : '' }}>Februari</option>
-                  <option value="03" {{ request('filter') == '03' ? 'selected' : '' }}>Maret</option>
-                  <option value="04" {{ request('filter') == '04' ? 'selected' : '' }}>April</option>
-                  <option value="05" {{ request('filter') == '05' ? 'selected' : '' }}>Mei</option>
-                  <option value="06" {{ request('filter') == '06' ? 'selected' : '' }}>Juni</option>
-                  <option value="07" {{ request('filter') == '07' ? 'selected' : '' }}>Juli</option>
-                  <option value="08" {{ request('filter') == '08' ? 'selected' : '' }}>Agustus</option>
-                  <option value="09" {{ request('filter') == '09' ? 'selected' : '' }}>September</option>
-                  <option value="10" {{ request('filter') == '10' ? 'selected' : '' }}>Oktober</option>
-                  <option value="11" {{ request('filter') == '11' ? 'selected' : '' }}>November</option>
-                  <option value="12" {{ request('filter') == '12' ? 'selected' : '' }}>Desember</option>
+                  <option value="2023-01" {{ request('filter') == '2023-01' ? 'selected' : '' }}>Januari</option>
+                  <option value="2023-02" {{ request('filter') == '2023-02' ? 'selected' : '' }}>Februari</option>
+                  <option value="2023-03" {{ request('filter') == '2023-03' ? 'selected' : '' }}>Maret</option>
+                  <option value="2023-04" {{ request('filter') == '2023-04' ? 'selected' : '' }}>April</option>
+                  <option value="2023-05" {{ request('filter') == '2023-05' ? 'selected' : '' }}>Mei</option>
+                  <option value="2023-06" {{ request('filter') == '2023-06' ? 'selected' : '' }}>Juni</option>
+                  <option value="2023-07" {{ request('filter') == '2023-07' ? 'selected' : '' }}>Juli</option>
+                  <option value="2023-08" {{ request('filter') == '2023-08' ? 'selected' : '' }}>Agustus</option>
+                  <option value="2023-09" {{ request('filter') == '2023-09' ? 'selected' : '' }}>September</option>
+                  <option value="2023-10" {{ request('filter') == '2023-10' ? 'selected' : '' }}>Oktober</option>
+                  <option value="2023-11" {{ request('filter') == '2023-11' ? 'selected' : '' }}>November</option>
+                  <option value="2023-12" {{ request('filter') == '2023-12' ? 'selected' : '' }}>Desember</option>
                 </select>
                 <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fas fa-filter"></i></button>
               </div>

@@ -20,7 +20,15 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         @if (Route::has('login'))
                             @auth
+                              @can('owner')
                                 <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                              @endcan
+                              @can('manajer')
+                                <li><a class="dropdown-item" href="/pegawai">Admin</a></li>
+                              @endcan
+                              @can('operator')
+                                <li><a class="dropdown-item" href="/transaksi">Admin</a></li>
+                              @endcan
                                 <li><hr class="dropdown-divider" /></li>
                                 <form method="POST" action="{{ route('logout') }}">
                                   @csrf

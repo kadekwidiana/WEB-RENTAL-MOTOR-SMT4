@@ -24,7 +24,6 @@ class ReportMotorController extends Controller
         ], compact('motors'));
     }
 
-
     public function detailReportMotor($plat_motor)
     {
         $motor = Motor::with(['transaksi', 'pengeluaran'])->where('plat_motor', $plat_motor)->first();

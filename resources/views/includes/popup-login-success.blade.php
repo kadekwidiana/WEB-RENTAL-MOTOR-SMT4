@@ -8,7 +8,20 @@
         @endif berhasil login.</h3>
         </div>
         <div class="text-center mt-2 mb-4">
-          <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal" onclick="$('#exampleModal').modal('hide')">OK</button>
+          {{-- redirect owner --}}
+          @can('owner')
+          <a href="/dashboard" type="button" class="btn btn-secondary btn-lg" data-dismiss="modal" onclick="$('#exampleModal').modal('hide')">OK</a>
+          @endcan
+          
+          {{-- redirect manajer --}}
+          @can('manajer')
+          <a href="/motor" type="button" class="btn btn-secondary btn-lg" data-dismiss="modal" onclick="$('#exampleModal').modal('hide')">OK</a>
+          @endcan
+
+          {{-- redirect operator --}}
+          @can('operator')
+          <a href="/motor" type="button" class="btn btn-secondary btn-lg" data-dismiss="modal" onclick="$('#exampleModal').modal('hide')">OK</a>
+          @endcan
         </div>
       </div>
     </div>
