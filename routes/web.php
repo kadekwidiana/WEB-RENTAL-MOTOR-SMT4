@@ -35,7 +35,6 @@ Route::middleware('auth',)->group(function () {
         Route::get('/transaksi/create/data-transaksi', [TransaksiController::class, 'viewadd'])->name('transaksi.viewadd');
         Route::post('/transaksi/create/data-transaksi', [TransaksiController::class, 'tambah'])->name('transaksi.tambah');
         // Melihat data motor
-        // Route::resource('/motor', MotorController::class);
         Route::get('/motor', [MotorController::class, 'index'])->name('motor.index');
         // Penyewa
         Route::resource('/penyewa', PenyewaController::class);
@@ -61,7 +60,7 @@ Route::middleware('auth',)->group(function () {
                 Route::patch('/pegawai/{id}/update-status', [UserController::class, 'statusPegawai'])->name('pegawai.statusPegawai');
                 Route::patch('/pegawai/{id}/update', [UserController::class, 'statusNonAktif'])->name('pegawai.statusNonAktif');
                 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-                Route::get('/dashboard/report-motor', [ReportMotorController::class, 'reportMotor']);
+                Route::get('/dashboard/report-motor', [ReportMotorController::class, 'reportMotor'])->name('report.motor');
                 Route::get('/dashboard/report-motor/{plat_motor}/detail', [ReportMotorController::class, 'detailReportMotor']);
             });
         });

@@ -27,8 +27,8 @@
               <form action="{{ route('motor.index') }}" method="GET">
                 <div class="input-group mb-3">
                   <select name="filter" id="filter" class="form-select">
-                    <option value="">--Filter motor--</option>
-                    @foreach (['Beat', 'Vario', 'Nmax', 'PCX', 'Scoopy', 'Fazzio', 'ADV'] as $item)
+                    <option value="">--Filter tipe motor--</option>
+                    @foreach (['Honda', 'Yamaha', 'Suzuki', 'Ninja', 'Trail',] as $item)
                       <option value="{{ $item }}" {{ request('filter') == $item ? 'selected' : ''  }}>{{ $item }}</option>
                     @endforeach
                     
@@ -46,7 +46,6 @@
               </div>
             </form>
             </div>
-            
           </div>
         <table class="table">
             <thead>
@@ -161,6 +160,13 @@
             </tbody>
         </table>
     </div>
+
+  @empty($motor)
+    <div class="text-center" style="font-weight: bold">
+      <h5 style="font-weight: bold">Data motor belum ada</h5>
+      <a href="{{ route('motor.create') }}" class="">Tambah data motor ?</a>
+    </div>
+  @endempty
 
     <div class="d-flex justify-content-end mt-2">
         {{ $motors->links() }}

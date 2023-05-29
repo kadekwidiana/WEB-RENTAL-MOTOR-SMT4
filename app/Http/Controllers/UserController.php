@@ -11,13 +11,29 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        // $pegawais = User::all();
         $search = $request->search;
-        $pegawais = User::where('nama_pegawai', 'like', '%' . $search . '%')
-            ->orWhere('username', 'like', '%' . $search . '%')
-            ->orWhere('email', 'like', '%' . $search . '%')
-            ->orWhere('alamat', 'like', '%' . $search . '%')
-            ->paginate(10);
+        $filter = $request->filter;
+
+        if ($search || $filter) {
+            $paginate = 100;
+        } else {
+            $paginate = 10;
+        }
+
+        $query = User::query();
+
+        if ($search) {
+            $query->where('nama_pegawai', 'like', '%' . $search . '%')
+                ->orWhere('username', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhere('alamat', 'like', '%' . $search . '%');
+        }
+
+        if ($filter) {
+            $query->where('jenis_kelamin', 'like', '%' . $filter . '%');
+        }
+
+        $pegawais = $query->latest()->paginate($paginate);
 
         return view('pegawai.index', [
             'title' => 'Operator & Pegawai',

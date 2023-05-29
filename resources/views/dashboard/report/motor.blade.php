@@ -2,6 +2,18 @@
 
 @section('content')
 <div class="container">
+    {{-- filter/pencarian --}}
+    <div class="row mb-2">
+        {{-- Pencarian motor --}}
+        <div class="col">
+            <form action="{{ route('report.motor') }}" method="GET">
+            <div class="input-group mb-3">
+              <input name="search" type="text" value="{{ request('search') }}" class="form-control" placeholder="Cari...">
+              <button class="btn btn-secondary" type="submit" id="button-addon2">Cari</button>
+            </div>
+          </form>
+          </div>
+        </div>
     <table class="table">
         <thead>
             <table class="table table-bordered text-center">
@@ -18,7 +30,7 @@
             @foreach ($motors as $motor)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $motor->nama_motor }}</td>
+                    <td>{{ $motor->nama_motor }} ({{ $motor->plat_motor }})</td>
                     <td>
                         @php
                             $pemasukan = $motor->transaksi->sum('total');

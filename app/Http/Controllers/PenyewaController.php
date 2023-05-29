@@ -18,15 +18,32 @@ class PenyewaController extends Controller
      */
     public function index(Request $request)
     {
-        // $penyewas = Penyewa::all();
+        $filter = $request->filter;
         $search = $request->search;
-        $penyewas = Penyewa::where('nama_penyewa', 'like', '%' . $search . '%')
-            ->orWhere('email', 'like', '%' . $search . '%')
-            ->orWhere('asal_negara', 'like', '%' . $search . '%')
-            ->orWhere('jenis_kelamin', 'like', '%' . $search . '%')
-            ->orWhere('domisili', 'like', '%' . $search . '%')
-            ->latest()
-            ->paginate(10);
+
+        if ($search || $filter) {
+            $paginate = 50;
+        } else {
+            $paginate = 10;
+        }
+
+        $query = Penyewa::query();
+
+        if ($search) {
+            $query->where('no_paspor', 'like', '%' . $search . '%')
+                ->orWhere('nama_penyewa', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhere('asal_negara', 'like', '%' . $search . '%')
+                ->orWhere('jenis_kelamin', 'like', '%' . $search . '%')
+                ->orWhere('domisili', 'like', '%' . $search . '%');
+        }
+
+        if ($filter) {
+            $query->where('jenis_kelamin', 'like', '%' . $filter . '%');
+        }
+
+        $penyewas = $query->latest()->paginate($paginate);
+
         return view('penyewa.index', [
             'title' => 'Data Penyewa',
             'active' => 'Penyewa'

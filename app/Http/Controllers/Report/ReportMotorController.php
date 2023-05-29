@@ -13,10 +13,25 @@ class ReportMotorController extends Controller
     public function reportMotor(Request $request)
     {
         $search = $request->search;
-        $motors = Motor::with(['transaksi', 'pengeluaran'])
-            ->orWhere('nama_motor', 'like', '%' . $search . '%')
-            ->latest()
-            ->paginate(10);
+
+        if ($search) {
+            $paginate = 100;
+        } else {
+            $paginate = 10;
+        }
+
+        $query = Motor::query();
+        if ($search) {
+            $query->where('nama_motor', 'like', '%' . $search . '%')
+                ->orWhere('plat_motor', 'like', '%' . $search . '%');
+        }
+
+        $motors = $query->latest()->paginate($paginate);
+
+        // $motors = Motor::with(['transaksi', 'pengeluaran'])
+        //     ->orWhere('nama_motor', 'like', '%' . $search . '%')
+        //     ->latest()
+        //     ->paginate(10);
 
         return view('dashboard.report.motor', [
             'title' => 'Laporan Motor',

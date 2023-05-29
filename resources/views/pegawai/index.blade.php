@@ -4,19 +4,30 @@
 <div class="d-flex">
   <a href="{{ route('pegawai.create') }}" class="btn btn-primary">Tambah Pegawai</a>
 </div>
-<div class="mt-3 justify-content-center">
+{{-- filter/pencarian --}}
+<div class="row mb-2 mt-2">
+  <div class="col">
     <form action="{{ route('pegawai.index') }}" method="GET">
-      <div class="row">
-        <div class="col">
-          <div class="input-group mb-3">
-            <input type="text" value="{{ Request::input('search') }}" class="form-control" placeholder="Cari data pegawai...." name="search">
-          </div>
-        </div>
-        <div class="col-1">
-        <button class="btn btn-secondary" type="submit">Cari</button>
-        </div>
+      <div class="input-group mb-3">
+        <select name="filter" id="filter" class="form-select">
+          <option value="">--Filter jenis kelamin--</option>
+          <option value="Laki-laki" {{ request('filter') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+          <option value="Perempuan" {{ request('filter') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+        </select>
+        <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fas fa-filter"></i></button>
       </div>
     </form>
+  </div>
+
+  {{-- Pencarian pegawai --}}
+  <div class="col-8">
+    <form action="{{ route('pegawai.index') }}" method="GET">
+    <div class="input-group mb-3">
+      <input name="search" type="text" value="{{ request('search') }}" class="form-control" placeholder="Cari...">
+      <button class="btn btn-secondary" type="submit" id="button-addon2">Cari</button>
+    </div>
+  </form>
+  </div>
 </div>
 <table class="table table-bordered">
     <thead>
@@ -131,6 +142,13 @@
         @endforeach
     </tbody>
   </table>
+
+  @empty($pegawai)
+    <div class="text-center" style="font-weight: bold">
+      <h5 style="font-weight: bold">Data pegawai belum ada</h5>
+      <a href="{{ route('pegawai.create') }}" class="">Tambah pegawai ?</a>
+    </div>
+  @endempty
 
   <div class="d-flex justify-content-end mt-2">
     {{ $pegawais->links() }}

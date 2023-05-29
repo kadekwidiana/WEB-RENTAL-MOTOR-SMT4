@@ -23,7 +23,7 @@ class MotorController extends Controller
         $search = $request->search;
 
         if ($search || $filter) {
-            $paginate = 50;
+            $paginate = 100;
         } else {
             $paginate = 10;
         }
@@ -40,7 +40,7 @@ class MotorController extends Controller
 
         if ($filter) {
             $query->where('status', 'like', '%' . $filter . '%')
-                ->orWhere('nama_motor', 'like', '%' . $filter . '%');
+                ->orWhere('tipe', 'like', '%' . $filter . '%');
         }
 
         $motors = $query->latest()->paginate($paginate);
