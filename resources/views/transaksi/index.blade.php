@@ -22,6 +22,58 @@
   {{-- Menampilkan pengembalian --}}
   
     <button type="button" class="btn btn-outline-warning mb-2 fw-bold text-dark" id="toggleButton">Tampilkan Pengembalian</button>
+    {{-- <button type="button" class="btn btn-outline-secondary mb-2 fw-bold text-dark" id="hideButton">Tampilkan sudah di kembalikan</button>
+
+    <div class="div3">
+      div 3
+    </div> --}}
+    <button type="button" class="btn btn-outline-secondary mb-2 fw-bold text-dark" id="hideButton">Tampilkan yang sudah di kembalikan</button>
+
+<div id="div3" style="display: none;">
+  <table  class="table table-bordered">
+    <thead>
+      <tr>
+          <th>No.</th>
+          <th>Nama Penyewa</th>
+          <th>Motor</th>
+          <th>Tgl Mulai</th>
+          <th>Tgl Selesai</th>
+          <th>Total Harga</th>
+          <th>KM Awal</th>
+          <th>KM Akhir</th>
+          <th>Jumlah helm</th>
+          <th>Aksi</th>
+      </tr>
+  </thead>
+  <tbody>
+    @php
+        $no = 1;
+    @endphp
+    @foreach ($transaksis as $transaksi)
+    <tr>
+      @if ($transaksi->status_transaksi == 1)
+      <td>{{ $no++ }}</td>
+      <td>{{ $transaksi->penyewa->nama_penyewa }}</td>
+      <td>{{ $transaksi->motor->nama_motor }} {{ $transaksi->plat_motor }}</td>
+      <td>{{ date('d F Y', strtotime($transaksi->tgl_mulai)) }}</td>
+      <td>{{ date('d F Y', strtotime($transaksi->tgl_selesai)) }}</td>
+      <td>{{ number_format($transaksi->total, 0, ',', '.') }}</td>
+      <td>{{ number_format($transaksi->km_awal, 0, ',', '.') }}</td>
+      <td>{{ $transaksi->km_akhir }}</td>
+      <td>{{ $transaksi->jumlah_helm }}</td>
+
+        <td>
+            <a href="{{ route('transaksi.pengembalian', $transaksi->kode_transaksi) }}" class="btn btn-warning btn-sm mt-1" >Pengembalian</a>
+            
+          </td>
+      @endif
+        
+    </tr>
+    @endforeach
+</tbody>
+  </table>
+
+</div>
 
   {{-- PENYEWAAN --}}
   <table id="div1" class="table table-bordered">
@@ -110,7 +162,7 @@
             <th>KM Awal</th>
             <th>KM Akhir</th>
             <th>Jumlah helm</th>
-            <th>Aksi</th>
+            <th>Ket/Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -119,16 +171,16 @@
         @endphp
         @foreach ($transaksis as $transaksi)
         <tr>
-          @if ($transaksi->km_akhir == '-')
-            <td>{{ $no++ }}</td>
-            <td>{{ $transaksi->penyewa->nama_penyewa }}</td>
-            <td>{{ $transaksi->motor->nama_motor }} {{ $transaksi->plat_motor }}</td>
-            <td>{{ date('d F Y', strtotime($transaksi->tgl_mulai)) }}</td>
-            <td>{{ date('d F Y', strtotime($transaksi->tgl_selesai)) }}</td>
-            <td>{{ number_format($transaksi->total, 0, ',', '.') }}</td>
-            <td>{{ number_format($transaksi->km_awal, 0, ',', '.') }}</td>
-            <td>{{ $transaksi->km_akhir }}</td>
-            <td>{{ $transaksi->jumlah_helm }}</td>
+          @if ($transaksi->status_transaksi == 0)
+          <td>{{ $no++ }}</td>
+          <td>{{ $transaksi->penyewa->nama_penyewa }}</td>
+          <td>{{ $transaksi->motor->nama_motor }} {{ $transaksi->plat_motor }}</td>
+          <td>{{ date('d F Y', strtotime($transaksi->tgl_mulai)) }}</td>
+          <td>{{ date('d F Y', strtotime($transaksi->tgl_selesai)) }}</td>
+          <td>{{ number_format($transaksi->total, 0, ',', '.') }}</td>
+          <td>{{ number_format($transaksi->km_awal, 0, ',', '.') }}</td>
+          <td>{{ $transaksi->km_akhir }}</td>
+          <td>{{ $transaksi->jumlah_helm }}</td>
 
             <td>
                 <a href="{{ route('transaksi.pengembalian', $transaksi->kode_transaksi) }}" class="btn btn-warning btn-sm mt-1" >Pengembalian</a>
@@ -137,32 +189,6 @@
           @endif
             
         </tr>
-          <!-- Modal Detail Transaksi -->
-        <div class="modal fade" id="{{ $transaksi->kode_transaksi }}" tabindex="-1" aria-labelledby="{{ $transaksi->kode_transaksi }}Label" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title fw-bold" id="exampleModalLabel">Detail Transaksi</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <p><strong>Kode Transaksi     : </strong>{{ $transaksi->kode_transaksi }}</p>
-                <p><strong>Nama Penyewa       : </strong>{{ $transaksi->penyewa->nama_penyewa }}  <strong> No Paspor : </strong>{{ $transaksi->no_paspor }} </p>
-                <p><strong>Motor yang di sewa : </strong>{{ $transaksi->motor->nama_motor }} {{ $transaksi->plat_motor }}</p>
-                <p><strong>Operator/Pegawai   : </strong>{{ $transaksi->user->nama_pegawai }} </p>
-                <p><strong>Tanggal mulai      : </strong>{{ $transaksi->tgl_mulai }}</p>
-                <p><strong>Tanggal selesai    : </strong>{{ $transaksi->tgl_selesai }}</p>
-                <p><strong>Total harga sewa   : </strong>Rp.{{ number_format($transaksi->total, 0, ',', '.') }}</p>
-                <p><strong>Kilometer Awal     : </strong>{{ number_format($transaksi->km_awal, 0, ',', '.') }} km.</p>
-                <p><strong>Kilometer Akhir    : </strong>{{ $transaksi->km_akhir }}</p>
-                <p><strong>Catatan            : </strong>{{ $transaksi->catatan }}</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
         @endforeach
     </tbody>
   </table>
@@ -184,6 +210,19 @@
     var toggleButton = document.getElementById("toggleButton");
     var div1 = document.getElementById("div1");
     var div2 = document.getElementById("div2");
+    var div3 = document.getElementById("div3");
+
+   // Fungsi untuk menampilkan div3 dan menghilangkan div1 dan div2
+    function showDiv3() {
+      div1.style.display = "none";
+      div2.style.display = "none";
+      div3.style.display = "block";
+    }
+
+    // Event listener untuk tombol "Tampilkan sudah di kembalikan"
+    document.getElementById("hideButton").addEventListener("click", function () {
+      showDiv3();
+    });
   
     // Mendefinisikan status tampilan awal
     var isDiv1Visible = true;
@@ -202,10 +241,12 @@
       if (isDiv1Visible) {
         div1.style.display = "block"; // Tampilkan div1
         div2.style.display = "none"; // Sembunyikan div2
+        div3.style.display = "none"; // Sembunyikan div2
         toggleButton.innerText = "Tampilkan Pengembalian"; // Ubah teks tombol
       } else {
         div1.style.display = "none"; // Sembunyikan div1
         div2.style.display = "block"; // Tampilkan div2
+        div3.style.display = "none"; // Tampilkan div2
         toggleButton.innerText = "Tampilkan Penyewaan"; // Ubah teks tombol
       }
   

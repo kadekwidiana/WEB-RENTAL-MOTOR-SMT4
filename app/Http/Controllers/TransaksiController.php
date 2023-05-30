@@ -231,6 +231,7 @@ class TransaksiController extends Controller
         $transaksi->km_akhir = $validated['km_akhir'];
         $transaksi->catatan = $validated['catatan'];
         $transaksi->jumlah_helm = $validated['jumlah_helm'];
+        $transaksi->status_transaksi = 1;
         $transaksi->update();
 
         // memperbarui status motor

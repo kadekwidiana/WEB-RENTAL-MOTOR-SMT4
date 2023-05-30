@@ -26,7 +26,8 @@ class Transaksi extends Model
         'km_awal',
         'km_akhir',
         'jumlah_helm',
-        'catatan'
+        'catatan',
+        'status_transaksi'
     ];
 
     public function motor()

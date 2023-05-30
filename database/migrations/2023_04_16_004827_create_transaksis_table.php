@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('km_akhir', 10);
             $table->string('jumlah_helm', 2);
             $table->text('catatan')->nullable();
+            $table->boolean('status_transaksi')->default(false);
             $table->timestamps();
         });
     }

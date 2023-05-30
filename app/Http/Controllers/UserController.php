@@ -90,7 +90,7 @@ class UserController extends Controller
         // User::create($user->all());
 
         return redirect()->route('pegawai.index')
-            ->with('success', 'Pegawai created successfully.');
+            ->with('success', 'Pegawai berhasil di tambahkan.');
     }
 
     /**
@@ -139,7 +139,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('pegawai.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil di hapus.');
     }
 
     public function statusPegawai(Request $request, $id)
