@@ -73,7 +73,8 @@ class TransaksiController extends Controller
             'km_awal' => 'required',
             'km_akhir' => 'required',
             'jumlah_helm' => 'required',
-            'catatan' => 'required'
+            'catatan' => 'required',
+            'status_transaksi' => 'required'
         ]);
 
         $penyewa = new Penyewa();
@@ -100,6 +101,7 @@ class TransaksiController extends Controller
         $transaksi->km_akhir = $validated['km_akhir'];
         $transaksi->catatan = $validated['catatan'];
         $transaksi->jumlah_helm = $validated['jumlah_helm'];
+        $transaksi->status_transaksi = 0;
         $transaksi->save();
 
         // memperbarui status motor
@@ -164,14 +166,13 @@ class TransaksiController extends Controller
         $transaksi->km_akhir = $validated['km_akhir'];
         $transaksi->catatan = $validated['catatan'];
         $transaksi->jumlah_helm = $validated['jumlah_helm'];
+        $transaksi->status_transaksi = 0;
         $transaksi->save();
 
         // memperbarui status motor
         $motor = Motor::where('plat_motor', $request->input('plat_motor'))->firstOrFail();
         $motor->status = 0;
         $motor->save();
-
-        // Transaksi::create($request->all());
 
         return redirect()->route('transaksi.index')
             ->with('success', 'Transaksi berhasil di buat.');
