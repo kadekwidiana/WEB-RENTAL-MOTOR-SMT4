@@ -12,6 +12,11 @@ use Symfony\Component\Console\Input\Input;
 
 class MotorController extends Controller
 {
+    public function apiMotor()
+    {
+        $motor = Motor::all();
+        return response()->json($motor);
+    }
     /**
      * Display a listing of the resource.
      *
