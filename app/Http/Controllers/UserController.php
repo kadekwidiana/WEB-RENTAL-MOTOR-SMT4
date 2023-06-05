@@ -58,7 +58,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_pegawai' => 'required',
+            'nama_pegawai' => 'required|alpha',
             'alamat' => 'required',
             'tgl_lahir' => 'required',
             'jenis_kelamin' => 'required',

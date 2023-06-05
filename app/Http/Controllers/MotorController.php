@@ -79,13 +79,13 @@ class MotorController extends Controller
     {
         $data = $request->validate([
             'plat_motor' => 'required|string|max:15|unique:motors',
-            'nama_motor' => 'required|string|max:20',
-            'warna' => 'required|in:merah,kuning,hijau,biru,hitam,putih',
+            'nama_motor' => 'required|string|max:20|alpha',
+            'warna' => 'required',
             'tipe' => 'required',
             'tahun' => 'required|numeric|digits:4',
             'tgl_pajak' => 'required|date',
-            'nama_pemilik' => 'required|string|max:100',
-            'cc' => 'required|numeric|digits:3',
+            'nama_pemilik' => 'required|string|max:100|alpha',
+            'cc' => 'required|numeric',
             'harga_sewa' => 'required|string|max:10',
             'status' => 'required|numeric|digits:1',
             'gambar_motor' => 'required',
@@ -98,7 +98,7 @@ class MotorController extends Controller
 
         Motor::create($data);
 
-        return redirect()->route('motor.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('motor.index')->with('success', 'Data motor berhasil ditambahkan');
     }
 
     /**
@@ -143,12 +143,13 @@ class MotorController extends Controller
     {
         $validatedData = $request->validate([
             'nama_motor' => 'required|string|max:20',
-            'warna' => 'required|string|max:10',
-            'tipe' => 'required|string|max:10',
+            'nama_motor' => 'required|string|max:20|alpha',
+            'warna' => 'required',
+            'tipe' => 'required',
             'tahun' => 'required|numeric|digits:4',
             'tgl_pajak' => 'required|date',
-            'nama_pemilik' => 'required|string|max:100',
-            'cc' => 'required|numeric|digits:3',
+            'nama_pemilik' => 'required|string',
+            'cc' => 'required|numeric',
             'harga_sewa' => 'required|string|max:10',
             'status' => 'required|numeric|digits:1',
             // 'gambar_motor' => 'required',
@@ -165,7 +166,7 @@ class MotorController extends Controller
         $motor = Motor::findOrFail($plat_motor);
         $motor->update($validatedData);
 
-        return redirect()->route('motor.index')->with('success', 'Motor updated successfully.');
+        return redirect()->route('motor.index')->with('success', 'Data motor berhasil di update.');
     }
 
     /**
@@ -199,6 +200,6 @@ class MotorController extends Controller
         }
         $motor->delete();
 
-        return redirect()->route('motor.index')->with('success', 'Motor deleted successfully.');
+        return redirect()->route('motor.index')->with('success', 'Data motor berhasil di hapus.');
     }
 }

@@ -2,8 +2,6 @@
 
 @section('content')
 <div class="align-content-end mb-4">
-                    <div class="card-header">{{ __('Edit Motor') }}</div>
-
                     <div class="card-body">
                         <form method="POST" action="{{ route('motor.update', $motor->plat_motor) }}" enctype="multipart/form-data">
                             @csrf
@@ -120,7 +118,7 @@
 
                         <div class="form-group">
                             <label for="cc" class="col-md-4 col-form-label text-md-right">CC</label>
-                                <input id="cc" type="text" class="form-control @error('cc') is-invalid @enderror" name="cc" value="{{ old('cc', $motor->cc) }}" required autocomplete="cc">
+                                <input id="cc" type="number" class="form-control @error('cc') is-invalid @enderror" name="cc" value="{{ old('cc', $motor->cc) }}" required autocomplete="cc">
 
                                 @error('cc')
                                     <span class="invalid-feedback" role="alert">
@@ -131,8 +129,7 @@
 
                         <div class="form-group">
                             <label for="harga_sewa" class="col-md-4 col-form-label text-md-right">Harga Sewa</label>
-                                <input id="harga_sewa" type="text" class="form-control @error('harga_sewa') is-invalid @enderror" name="harga_sewa" value="{{ old('harga_sewa', $motor->harga_sewa) }}" required autocomplete="harga_sewa">
-
+                                <input id="harga_sewa" type="number" class="form-control @error('harga_sewa') is-invalid @enderror" name="harga_sewa" value="{{ old('harga_sewa', $motor->harga_sewa) }}" required autocomplete="harga_sewa">
                                 @error('harga_sewa')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -184,14 +181,12 @@
                               
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4 text-left">
-                                <button type="submit" class="btn btn-primary">
-                                    Update
-                                </button>
-                                <a href="{{ route('motor.index') }}" class="btn btn-danger">Cancel</a>
-                            </div>
-                        </div>                        
+                        <div class="form-group mt-2">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="{{ route('motor.index') }}" class="btn btn-danger">
+                                {{ __('Batal') }}
+                            </a>
+                        </div>                      
                     </form>
                 </div>
             </div>

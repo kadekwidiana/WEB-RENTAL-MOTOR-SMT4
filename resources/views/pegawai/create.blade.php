@@ -5,21 +5,18 @@
     <form method="POST" action="{{ route('pegawai.store') }}">
         @csrf
         <div class="border p-3 rounded">
-            
             <div class="form-group">
                 <label for="nama_pegawai">{{ __('Nama Pegawai') }}</label>
-                <input id="nama_pegawai" type="text" class="form-control @error('nama_pagawai') is-invalid @enderror" name="nama_pegawai" value="{{ old('nama_pegawai') }}" placeholder="Masukan Nama Pegawai" autofocus >
-
+                <input id="nama_pegawai" type="text" pattern="[A-Za-z\s]+" class="form-control @error('nama_pagawai') is-invalid @enderror" name="nama_pegawai" value="{{ old('nama_pegawai') }}" placeholder="Masukan Nama Pegawai" autofocus >
                 @error('nama_pegawai')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-        </div>
+            </div>
         <div class="form-group">
             <label for="email">{{ __('Email') }}</label>
-                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Masukan Email" autofocus>
-
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Masukan Email" autofocus>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -27,7 +24,7 @@
                 @enderror
         </div>
         <div class="form-group">
-            <label for="username">{{ __('username') }}</label>
+            <label for="username">{{ __('Username') }}</label>
                 <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="Masukan Usernmae" autofocus>
 
                 @error('username')
@@ -54,7 +51,6 @@
             <div class="form-group">
                 <label for="tgl_lahir">{{ __('Tanggal Lahir') }}</label>
                     <input id="tgl_lahir" type="date" class="form-control @error('tgl_lahir') is-invalid @enderror" name="tgl_lahir" value="{{ old('tgl_lahir') }}" rplaceholder="Masukan Tanggal Lahir" autofocus>
-
                     @error('tgl_lahir')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -96,7 +92,6 @@
                         <option value="2" {{ old('is_admin') == 2 ? 'selected' : '' }}>Manager</option>
                         <option value="1" {{ old('is_admin') == 1 ? 'selected' : '' }}>Operator</option>
                     </select>
-
                     @error('is_admin')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

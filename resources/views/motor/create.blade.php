@@ -7,15 +7,14 @@
             <div class="border p-3 rounded">
                 <div class="form-group mt-2">
                     <label label for="plat_motor">Plat Motor</label>
-                    <input type="text" class="form-control plat_motor @error('plat_motor') is-invalid @enderror" id="plat_motor" name="plat_motor" value="{{ old('plat_motor') }}" placeholder="Masukan Plat Motor" required>
+                    <input type="text" class="form-control plat_motor @error('plat_motor') is-invalid @enderror" id="plat_motor" name="plat_motor" value="{{ old('plat_motor') }}" placeholder="Masukan Plat Motor" required autofocus>
                     @error('plat_motor')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>                           
-
                             <div class="form-group">
                                 <label for="nama_motor">{{ __('Nama Motor') }}</label>
-                                    <input id="nama_motor" type="text" class="form-control @error('nama_motor') is-invalid @enderror" name="nama_motor" value="{{ old('nama_motor') }}" placeholder="Masukan Nama Motor" autofocus>
+                                    <input id="nama_motor" type="text" class="form-control @error('nama_motor') is-invalid @enderror" name="nama_motor" value="{{ old('nama_motor') }}" placeholder="Masukan Nama Motor">
 
                                     @error('nama_motor')
                                         <span class="invalid-feedback" role="alert">
@@ -79,10 +78,9 @@
                             
                             <div class="form-group">
                                 <label for="tahun">{{ __('Tahun') }}</label>
-                                    <input id="tahun" type="text" class="form-control @error('tahun') is-invalid @enderror" name="tahun" value="{{ old('tahun') }}" placeholder="Masukan Tahun" autofocus>
-
+                                    <input id="tahun" type="number" class="form-control @error('tahun') is-invalid @enderror" name="tahun" value="{{ old('tahun') }}" placeholder="Masukan Tahun">
                                     @error('tahun')
-                                    <span class="help-block">
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -112,8 +110,7 @@
 
                         <div class="form-group">
                             <label for="cc">{{ __('CC') }}</label>
-                                <input id="cc" type="text" class="form-control @error('cc') is-invalid @enderror" name="cc" value="{{ old('cc') }}" placeholder="Masukan CC" autofocus>
-
+                                <input id="cc" type="number" class="form-control @error('cc') is-invalid @enderror" name="cc" value="{{ old('cc') }}" placeholder="Masukan CC" autofocus>
                                 @error('cc')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -123,8 +120,7 @@
 
                         <div class="form-group">
                             <label for="harga_sewa">{{ __('Harga Sewa') }}</label>
-                                <input id="harga_sewa" type="text" class="form-control @error('harga_sewa') is-invalid @enderror" name="harga_sewa" value="{{ old('harga_sewa') }}" placeholder="Masukan Harga Sewa" autofocus>
-
+                                <input id="harga_sewa" type="number" class="form-control @error('harga_sewa') is-invalid @enderror" name="harga_sewa" value="{{ old('harga_sewa')}}" placeholder="Masukan Harga Sewa" autofocus>
                                 @error('harga_sewa')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -134,10 +130,10 @@
 
                         <div class="form-group">
                             <label for="status">{{ __('Status') }}</label>
-                                <select id="status" name="status" class="form-control @error('status') is-invalid @enderror" required>
-                                    <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>{{ __('Available') }}</option>
-                                    <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>{{ __('Not Available') }}</option>
-                                </select>
+                            <select id="status" name="status" class="form-control @error('status') is-invalid @enderror" required>
+                                <option value="1" selected>Tersedia</option>
+                                <option value="0" >Disewakan</option>
+                            </select>                            
 
                                 @error('status')
                                     <span class="invalid-feedback" role="alert">
@@ -170,7 +166,7 @@
                             </div>
                             
 
-                        <div class="form-group">
+                            <div class="form-group mt-2">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Tambah') }}
                                 </button>

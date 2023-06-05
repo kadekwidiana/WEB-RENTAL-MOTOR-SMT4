@@ -60,7 +60,7 @@ class TransaksiController extends Controller
             'asal_negara' => 'required',
             'jenis_kelamin' => 'required',
             'domisili' => 'required',
-            'no_telepon' => 'required',
+            'no_telepon' => 'required|numeric',
             'no_sim' => 'required',
             // transaksi
             'kode_transaksi' => 'required|unique:transaksis,kode_transaksi|max:15',
@@ -69,10 +69,10 @@ class TransaksiController extends Controller
             'id_pegawai' => 'required',
             'tgl_mulai' => 'required',
             'tgl_selesai' => 'required',
-            'total' => 'required',
-            'km_awal' => 'required',
+            'total' => 'required|numeric',
+            'km_awal' => 'required|numeric',
             'km_akhir' => 'required',
-            'jumlah_helm' => 'required',
+            'jumlah_helm' => 'required|numeric',
             'catatan' => 'required',
             'status_transaksi' => 'required'
         ]);
@@ -147,10 +147,10 @@ class TransaksiController extends Controller
             'id_pegawai' => 'required',
             'tgl_mulai' => 'required',
             'tgl_selesai' => 'required',
-            'total' => 'required',
-            'km_awal' => 'required',
+            'total' => 'required|numeric',
+            'km_awal' => 'required|numeric',
             'km_akhir' => 'required',
-            'jumlah_helm' => 'required',
+            'jumlah_helm' => 'required|numeric',
             'catatan' => 'required'
         ]);
 
@@ -190,7 +190,7 @@ class TransaksiController extends Controller
             'asal_negara' => 'required',
             'jenis_kelamin' => 'required',
             'domisili' => 'required',
-            'no_telepon' => 'required',
+            'no_telepon' => 'required|numeric',
             'no_sim' => 'required',
             // transaksi
             'kode_transaksi' => 'required',
@@ -200,9 +200,9 @@ class TransaksiController extends Controller
             'tgl_mulai' => 'required',
             'tgl_selesai' => 'required',
             'total' => 'required',
-            'km_awal' => 'required',
+            'km_awal' => 'required|numeric',
             'km_akhir' => 'required',
-            'jumlah_helm' => 'required',
+            'jumlah_helm' => 'required|numeric',
             'catatan' => 'required'
         ]);
 
@@ -281,7 +281,7 @@ class TransaksiController extends Controller
             'asal_negara' => 'required',
             'jenis_kelamin' => 'required',
             'domisili' => 'required',
-            'no_telepon' => 'required',
+            'no_telepon' => 'required|numeric',
             'no_sim' => 'required',
             // transaksi
             'kode_transaksi' => 'required',
@@ -290,11 +290,11 @@ class TransaksiController extends Controller
             'id_pegawai' => 'required',
             'tgl_mulai' => 'required',
             'tgl_selesai' => 'required',
-            'total' => 'required',
-            'km_awal' => 'required',
+            'total' => 'required|numeric',
+            'km_awal' => 'required|numeric',
             'km_akhir' => 'required',
-            'jumlah_helm' => 'required',
-            'catatan' => 'required'
+            'jumlah_helm' => 'required|numeric',
+            'catatan' => 'required',
         ]);
 
         $penyewa = Penyewa::where('no_paspor', $validated['no_paspor'])->firstOrFail();
@@ -323,6 +323,7 @@ class TransaksiController extends Controller
         $transaksi->km_akhir = $validated['km_akhir'];
         $transaksi->catatan = $validated['catatan'];
         $transaksi->jumlah_helm = $validated['jumlah_helm'];
+        $transaksi->status_transaksi = 1;
         $transaksi->update();
         // $transaksi->update($request->all());
 
