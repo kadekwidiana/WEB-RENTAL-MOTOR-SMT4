@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Pengeluaran;
 use App\Models\Motor;
 use App\Models\User;
+use Illuminate\Support\Facades\App;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PengeluaranController extends Controller
 {
@@ -57,6 +59,16 @@ class PengeluaranController extends Controller
             'title' => 'Pengeluaran',
             'active' => 'Motor'
         ])->with(compact('pengeluarans', 'totalPengeluaran'));
+    }
+
+    public function generatePdf()
+    {
+        $pengeluarans = Pengeluaran::all();
+        $totalPengeluaran = Pengeluaran::sum('biaya_pengeluaran');
+        $pdf = Pdf::loadView('pengeluaran.generate-pdf', [
+            'title' => 'Laporan'
+        ], compact('pengeluarans', 'totalPengeluaran'));
+        return $pdf->stream('laporan.pdf');
     }
 
     public function create()

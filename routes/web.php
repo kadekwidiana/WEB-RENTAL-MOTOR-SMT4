@@ -52,6 +52,8 @@ Route::middleware('auth',)->group(function () {
 
             // Pengeluaran
             Route::resource('/pengeluaran', PengeluaranController::class);
+            // Print Laporan pengeluaran
+            Route::get('generatePdf-laporan-pengeluaran', [PengeluaranController::class, 'generatePdf'])->name('generate-pdf');
             // Kelola pegawai
             Route::resource('/pegawai', UserController::class);
 
@@ -69,7 +71,6 @@ Route::middleware('auth',)->group(function () {
         Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome.index');
     });
 });
-
 
 // Frontpage Rental Motor
 Route::get('/', [FrontPageController::class, 'viewHome'])->name('frontpage.home');
