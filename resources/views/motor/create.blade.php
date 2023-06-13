@@ -11,7 +11,7 @@
                     @error('plat_motor')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                </div>                           
+                </div>
                             <div class="form-group">
                                 <label for="nama_motor">{{ __('Nama Motor') }}</label>
                                     <input id="nama_motor" type="text" class="form-control @error('nama_motor') is-invalid @enderror" name="nama_motor" value="{{ old('nama_motor') }}" placeholder="Masukan Nama Motor">
@@ -165,7 +165,6 @@
                                 @enderror
                             </div>
                             
-
                             <div class="form-group mt-2">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Tambah') }}

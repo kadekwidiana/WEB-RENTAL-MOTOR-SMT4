@@ -13,6 +13,8 @@ class PengeluaranController extends Controller
     {
         $search = $request->input('search');
         $filter = $request->input('filter');
+        $month = $request->input('month');
+        $year = $request->input('year');
 
         $query = Pengeluaran::query();
 
@@ -32,9 +34,18 @@ class PengeluaranController extends Controller
                 $innerQuery->where('plat_motor', 'like', '%' . $filter . '%')
                     ->orWhereHas('motor', function ($q) use ($filter) {
                         $q->where('nama_motor', 'like', '%' . $filter . '%');
-                    })
-                    ->orWhere('jenis_pengeluaran', 'like', '%' . $filter . '%')
-                    ->orWhere('tgl_pengeluaran', 'like', '%' . $filter . '%');
+                    });
+            });
+        }
+        if ($month) {
+            $query->where(function ($innerQuery) use ($month) {
+                // $innerQuery->where('tgl_pengeluaran', 'like', '%' . $month . '%');
+                $innerQuery->whereMonth('tgl_pengeluaran', $month);
+            });
+        }
+        if ($year) {
+            $query->where(function ($innerQuery) use ($year) {
+                $innerQuery->whereYear('tgl_pengeluaran', $year);
             });
         }
 

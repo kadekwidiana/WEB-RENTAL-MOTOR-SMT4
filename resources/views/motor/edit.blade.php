@@ -11,7 +11,6 @@
                                 <div class="form-group mt-2">
                                     <label label for="plat_motor">Plat Motor</label>
                                     <input id="plat_motor" type="text" class="form-control @error('plat_motor') is-invalid @enderror" name="plat_motor" value="{{ old('plat_motor', $motor->plat_motor) }}" required autocomplete="plat_motor" readonly>
-
                                     @error('plat_motor')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
