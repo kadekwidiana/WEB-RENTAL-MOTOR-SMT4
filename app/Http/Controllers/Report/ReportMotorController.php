@@ -13,8 +13,11 @@ class ReportMotorController extends Controller
     public function reportMotor(Request $request)
     {
         $search = $request->search;
+        $filter = $request->input('filter');
+        $month = $request->input('month');
+        $year = $request->input('year');
 
-        if ($search) {
+        if ($search | $filter | $month | $year) {
             $paginate = 100;
         } else {
             $paginate = 10;
@@ -22,11 +25,45 @@ class ReportMotorController extends Controller
 
         $query = Motor::query();
         if ($search) {
-            $query->where('nama_motor', 'like', '%' . $search . '%')
-                ->orWhere('plat_motor', 'like', '%' . $search . '%');
+            $query->where(function ($q) use ($search) {
+                $q->where('motors.nama_motor', 'like', '%' . $search . '%')
+                    ->orWhere('transaksis.plat_motor', 'like', '%' . $search . '%');
+            });
         }
 
-        $motors = $query->latest()->paginate($paginate);
+
+        if ($filter) {
+            $query->where(function ($innerQuery) use ($filter) {
+                $innerQuery->where('plat_motor', 'like', '%' . $filter . '%')
+                    ->orWhereHas('motor', function ($q) use ($filter) {
+                        $q->where('nama_motor', 'like', '%' . $filter . '%');
+                    });
+            });
+        }
+        if ($month) {
+            $query->where(function ($innerQuery) use ($month) {
+                // $innerQuery->where('tgl_pengeluaran', 'like', '%' . $month . '%');
+                $innerQuery->whereMonth('transaksis.tgl_selesai', $month)
+                    ->orWhereMonth('pengeluarans.tgl_pengeluaran', $month);
+            });
+        }
+        if ($year) {
+            $query->where(function ($innerQuery) use ($year) {
+                $innerQuery->whereYear('transaksis.tgl_selesai', $year)
+                    ->orWhereYear('pengeluarans.tgl_pengeluaran', $year);
+            });
+        }
+
+        $motors = $query->leftJoin('transaksis', 'motors.plat_motor', '=', 'transaksis.plat_motor')
+            ->leftJoin('pengeluarans', 'motors.plat_motor', '=', 'pengeluarans.plat_motor')
+            ->select('motors.*', 'transaksis.tgl_selesai', 'pengeluarans.tgl_pengeluaran')
+            ->where(function ($q) {
+                $q->whereNotNull('transaksis.tgl_selesai')
+                    ->orWhereNotNull('pengeluarans.tgl_pengeluaran');
+            })
+            ->latest('transaksis.tgl_mulai')
+            ->paginate($paginate);
+
 
         // $motors = Motor::with(['transaksi', 'pengeluaran'])
         //     ->orWhere('nama_motor', 'like', '%' . $search . '%')
