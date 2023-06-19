@@ -12,6 +12,7 @@ use App\Http\Controllers\FrontPageController;
 use App\Http\Controllers\Report\ReportMotorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ContactController;
 
 
 // profile
@@ -77,3 +78,6 @@ Route::get('/', [FrontPageController::class, 'viewHome'])->name('frontpage.home'
 Route::get('/about', [FrontPageController::class, 'viewAbout'])->name('frontpage.about');
 Route::get('/view-motor', [FrontPageController::class, 'viewMotor'])->name('frontpage.motors');
 Route::get('/contact', [FrontPageController::class, 'viewContact'])->name('frontpage.contact');
+Route::resource('contact-admin', ContactController::class);
+
+
