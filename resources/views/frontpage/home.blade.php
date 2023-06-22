@@ -1,7 +1,7 @@
 @extends('frontpage.layouts.main')
 
 @section('content')
-<div class="hero-wrap ftco-degree-bg" style="background-image: url('assets/images/gambae.jpeg');" data-stellar-background-ratio="0.5">
+<div class="hero-wrap ftco-degree-bg" style="background-image: url('assets/images/home.jpeg');" data-stellar-background-ratio="0.5">
   <div class="container">
     <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
       <div class="col-lg-8 ftco-animate">

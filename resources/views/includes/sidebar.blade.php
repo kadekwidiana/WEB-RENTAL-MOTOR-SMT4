@@ -165,7 +165,15 @@
                 </a>
                 @endcan
 
+                <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                        <a class="nav-link collapsed {{ ($active === "contact") ? 'active' : '' }}" href="{{ route('contact-admin.index') }}">
+                            Daftar Pesan
+                        </a>
+                    </nav>
+                </div>
             </div>
+            
         </div>
     </nav>
 </div>
