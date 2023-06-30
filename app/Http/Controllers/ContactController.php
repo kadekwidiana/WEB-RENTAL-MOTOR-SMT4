@@ -58,7 +58,7 @@ class ContactController extends Controller
         $contact->pesan = $request->pesan;
         $contact->save();
     
-        return redirect()->route('frontpage.contact')->with('message', 'Pesan berhasil terkirim!');
+        return redirect()->route('frontpage.contact')->with('message', 'Message sent successfully!');
     }    
 
     public function show($id)

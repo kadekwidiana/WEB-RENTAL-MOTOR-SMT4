@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <h1>Kirim Pesan</h1>
+  <h1>send message</h1>
 
   <form action="{{ route('contact.store') }}" method="POST">
     @csrf

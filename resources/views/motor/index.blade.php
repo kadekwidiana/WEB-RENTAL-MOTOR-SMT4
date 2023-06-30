@@ -122,40 +122,40 @@
                     
                     <!-- Modal -->
                     <div class="modal fade" id="{{ $motor->plat_motor }}" tabindex="-1" aria-labelledby="tesLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="tesLabel">Detail Motor</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>
-                                    <center><img src="{{ asset('storage/' . $motor->gambar_motor) }}" width="350" alt=""></center>
-                                  </p>
-                                <p><strong>Plat Motor     : </strong>{{ $motor->plat_motor }}</p>
-                                <p><strong>Merek Motor     : </strong>{{ $motor->nama_motor }}</p>
-                                <p><strong>CC     : </strong>{{ $motor->cc }} cc</p>
-                                <p><strong>Warna     : </strong>{{ $motor->warna }}</p>
-                                <p><strong>Tipe     : </strong>{{ $motor->tipe }}</p>
-                                <p><strong>Tahun     : </strong>{{ $motor->tahun }}</p>
-                                <p><strong>Tanggal Pajak     : </strong>{{ date('d F Y', strtotime($motor->tgl_pajak)) }}</p>
-                                <p><strong>Nama Pemilik     : </strong>{{ $motor->nama_pemilik }}</p>
-                                <p><strong>Harga Sewa     : </strong>Rp. {{ number_format($motor->harga_sewa, 0, ',', '.') }}</p>
-                                <p><strong>Status    : </strong>
-                                    @if ($motor->status == 1)
-                                        <span class="badge bg-success">Tersedia</span>
-                                    @else
-                                        <span class="badge bg-secondary">Disewakan</span>
-                                    @endif
-                                </p>
-                                <p><strong>Tanggal Catat    : </strong>{{ date('d F Y', strtotime($motor->tgl_catat)) }}</p>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
+                      <div class="modal-dialog modal-dialog-centered modal-lg">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="tesLabel">Detail Motor</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <img src="{{ asset('storage/' . $motor->gambar_motor) }}" width="100%" alt="">
+                                      </div>
+                                      <div class="col-md-6">
+                                          <p><strong>Merek Motor: </strong>{{ $motor->nama_motor }}</p>
+                                          <p><strong>CC: </strong>{{ $motor->cc }} cc</p>
+                                          <p><strong>Warna: </strong>{{ $motor->warna }}</p>
+                                          <p><strong>Tipe: </strong>{{ $motor->tipe }}</p>
+                                          <p><strong>Tahun: </strong>{{ $motor->tahun }}</p>
+                                          <p><strong>Harga Sewa: </strong>Rp. {{ number_format($motor->harga_sewa, 0, ',', '.') }}</p>
+                                          <p><strong>Status: </strong>
+                                              @if ($motor->status == 1)
+                                                  <span class="badge bg-success">Tersedia</span>
+                                              @else
+                                                  <span class="badge bg-secondary">Disewakan</span>
+                                              @endif
+                                          </p>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>                  
                 @endforeach
             </tbody>
         </table>
