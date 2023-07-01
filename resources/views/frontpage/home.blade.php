@@ -1,13 +1,13 @@
 @extends('frontpage.layouts.main')
 
 @section('content')
-<div class="hero-wrap ftco-degree-bg" style="background-image: url('assets/images/home.jpeg');" data-stellar-background-ratio="0.5">
+<div class="hero-wrap ftco-degree-bg" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/images/rent.png');" data-stellar-background-ratio="0.5">
   <div class="container">
     <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
       <div class="col-lg-8 ftco-animate">
         <div class="text w-100 text-center mb-md-5 pb-md-5">
-          <h1 class="mb-4">YAKIN GAK KANGEN STAYCATION DI BALI ?</h1>
-          <p style="font-size: 18px;">Sewa murah motor berkualitas</p>
+          <h1 class="mb-4" style="color: white;">SURE I DON'T MISS STAYCATION IN BALI ?</h1>
+          <p style="font-size: 18px; color: white;">Cheap quality motorbike rental</p>
         </div>
       </div>
     </div>
@@ -18,8 +18,8 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-        <span class="subheading">APA YANG KITA TAWARKAN</span>
-        <h2 class="mb-2">Kendaraan Unggulan</h2>
+        <span class="subheading">WHAT WE OFFER</span>
+        <h2 class="mb-2">Featured Vehicles</h2>
       </div>
     </div>
     <div class="row">
@@ -49,18 +49,18 @@
                     <h2 class="mb-0"><a href="car-single.html">{{ $motor['nama_motor'] }} {{ $motor['cc'] }} cc.</a></h2>
                     <div class="d-flex mb-3">
                         <span class="text-bold">{{ $motor['tipe'] }}</span>
-                        <p class="price ml-auto">Rp {{ number_format($motor['harga_sewa'], 0, ',', '.') }} <span>/hari</span></p>
+                        <p class="price ml-auto">Rp {{ number_format($motor['harga_sewa'], 0, ',', '.') }} <span>/day</span></p>
                     </div>
                     <div class="d-flex mb-3">
                         @if ($motor['status'] == 1)
-                            <span class="badge bg-success">Tersedia</span>
+                            <span class="badge bg-success">Available</span>
                         @else
-                            <span class="badge bg-secondary">Disewakan</span>
+                            <span class="badge bg-secondary">For Rent</span>
                         @endif
                     </div>
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <a href="/view-motor" class="btn btn-primary py-2 ">
-                            Detail
+                            Details
                         </a>
                     </div>
                     
@@ -84,9 +84,9 @@
       <div class="col-md-6 wrap-about ftco-animate">
         <div class="heading-section heading-section-white pl-md-5">
           <span class="subheading">About us</span>
-          <h2 class="mb-4">Sewa Motor Bali MURAH & MUDAH</h2>
+          <h2 class="mb-4">Bali motorbike rental is CHEAP & EASY</h2>
 
-          <p>Sewa motor Bali MURAH dengan unit BERKUALITAS 24 Jam penuh.Rental Kami selalu memastikan kenyamanan bagi pelanggang dengan memberikan beberapa falisitas gratis seperti mengantar kendaraan ke hotel konsumen, memastikan jas hujan tersedia di jok motor, dan gratis bahan bakar.</p>
+          <p>CHEAP Bali motorbike rental with QUALITY units 24 hours a day. Rentals We always ensure comfort for customers by providing several free facilities such as driving the vehicle to the consumer's hotel, ensuring raincoats are available on the motorbike seats, and free fuel.</p>
           <p><a href="" class="btn btn-primary py-3 px-4">Readmore...</a></p>
         </div>
       </div>
@@ -99,7 +99,7 @@
     <div class="row justify-content-center mb-5">
       <div class="col-md-7 text-center heading-section ftco-animate">
         <span class="subheading">Services</span>
-        <h2 class="mb-3">Kenapa Memilih Rental Kami?</h2>
+        <h2 class="mb-3">Why Choose Our Rental?</h2>
       </div>
     </div>
     <div class="row">
@@ -107,8 +107,8 @@
         <div class="services services-2 w-100 text-center">
           <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-wedding-car"></span></div>
           <div class="text w-100">
-            <h3 class="heading mb-2">Terpercaya & Aman</h3>
-            <p>Sebagai salah satu jasa sewa motor berpengalaman di Bali, Kami sudah banyak dipercaya oleh para client dalam hal penyewaan kendaraan motor sesuai dengan apa yang dibutuhkan. Tidak main-main, proses cepat, dan pelayanan yang langsung.</p>
+            <h3 class="heading mb-2">Trusted & Safe</h3>
+            <p>As one of the experienced motorbike rental services in Bali, we have been trusted by many clients in terms of motorbike rental according to what is needed. No kidding, fast process, and direct service.</p>
           </div>
         </div>
       </div>
@@ -116,8 +116,8 @@
         <div class="services services-2 w-100 text-center">
           <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-transportation"></span></div>
           <div class="text w-100">
-            <h3 class="heading mb-2">Proses Booking Cepat & Mudah</h3>
-            <p>Anda bisa menggunakan layanan Telp, Email atau Whatsapp untuk melakukan reservasi rental motor di Bali. Jadi ini bisa menghemat waktu anda mencari sewa motor di Bali.</p>
+            <h3 class="heading mb-2">Fast & Easy Booking Process</h3>
+            <p>You can use the Tel, Email or Whatsapp services to make a motorbike rental reservation in Bali. So this can save you time looking for motorbike rental in Bali.</p>
           </div>
         </div>
       </div>
@@ -125,8 +125,8 @@
         <div class="services services-2 w-100 text-center">
           <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car"></span></div>
           <div class="text w-100">
-            <h3 class="heading mb-2">Kendaraan Dalam Kondisi Prima</h3>
-            <p>Untuk kondisi kendaraan sendiri kami juga sangat detail mulai dari perawatannya, kebersihannya, hingga mesin-mesinnya. Jadi jangan takut jika kendaraan akan mengalami keluhan selama digunakan.</p>
+            <h3 class="heading mb-2">Vehicles In Prime Condition</h3>
+            <p>For the condition of the vehicle itself, we are also very detailed, starting from maintenance, cleanliness, to the engines. So don't be afraid if the vehicle will experience complaints during use.</p>
           </div>
         </div>
       </div>
@@ -134,8 +134,8 @@
         <div class="services services-2 w-100 text-center">
           <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-transportation"></span></div>
           <div class="text w-100">
-            <h3 class="heading mb-2">Perawatan Rutin</h3>
-            <p>Untuk memberikan kepuasan kepada konsumen.Motor yang kami sewakan selalu di cek dan dilakukan perawatan berkala ke dealer resmi. Sehingga konsumen bisa menggunakan motor dengan nyaman dan aman selama di Bali.</p>
+            <h3 class="heading mb-2">Routine Care</h3>
+            <p>To provide satisfaction to consumers. The motorbikes that we rent are always checked and carried out periodic maintenance to official dealers. So consumers can use motorbikes comfortably and safely while in Bali.</p>
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-md-7 heading-section text-center ftco-animate">
-        <span class="subheading">Galeri</span>
+        <span class="subheading">Gallery</span>
         <h2>Damar Motorbike Rental</h2>
       </div>
     </div>

@@ -24,19 +24,19 @@
           </div>
           @endif
           <div class="form-group">
-            <input type="text" name="nama" class="form-control" placeholder="Nama" required>
+            <input type="text" name="nama" class="form-control" placeholder="Name" required>
           </div>
           <div class="form-group">
             <input type="email" name="email" class="form-control" placeholder="Email" required>
           </div>
           <div class="form-group">
-            <input type="text" name="subjek" class="form-control" placeholder="Subjek" required>
+            <input type="text" name="subjek" class="form-control" placeholder="Subject" required>
           </div>
           <div class="form-group">
-            <textarea name="pesan" id="" cols="30" rows="7" class="form-control" placeholder="Pesan" required></textarea>
+            <textarea name="pesan" id="" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
           </div>
           <div class="form-group">
-            <input type="submit" value="Kirim Pesan" class="btn btn-primary py-3 px-5">
+            <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
           </div>
           <div class="form-group">
             <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div>
@@ -50,7 +50,7 @@
               <div class="icon mr-3">
                 <span class="icon-map-o"></span>
               </div>
-              <p><span>Alamat:</span>Jl.Tirta Tawar 108, Br.Kutuh Kaja, Ubud, Gianyar, Bali-Indonesia</p>
+              <p><span>Address:</span>Jl.Tirta Tawar 108, Br.Kutuh Kaja, Ubud, Gianyar, Bali-Indonesia</p>
             </div>
           </div>
           <div class="col-md-12">
@@ -58,7 +58,7 @@
               <div class="icon mr-3">
                 <span class="icon-mobile-phone"></span>
               </div>
-              <p><span>No.Telpon:</span> <a href="tel://1234567920">+62 87 760 606 090</a></p>
+              <p><span>No.Phone:</span> <a href="tel://1234567920">+62 87 760 606 090</a></p>
             </div>
           </div>
           <div class="col-md-12">
@@ -71,7 +71,9 @@
           </div>
         </div>
         <div class="row d-flex mb-5 contact-info">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63136.55239133598!2d115.224753560492!3d-8.496024084965537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23d739f22c9c3%3A0x54a38afd6b773d1c!2sUbud%2C%20Kecamatan%20Ubud%2C%20Kabupaten%20Gianyar%2C%20Bali!5e0!3m2!1sid!2sid!4v1687055968281!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="border p-0 rounded mb-2" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63136.55239133598!2d115.224753560492!3d-8.496024084965537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23d739f22c9c3%3A0x54a38afd6b773d1c!2sUbud%2C%20Kecamatan%20Ubud%2C%20Kabupaten%20Gianyar%2C%20Bali!5e0!3m2!1sid!2sid!4v1687055968281!5m2!1sid!2sid" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -82,7 +84,7 @@
   function validateForm() {
     var response = grecaptcha.getResponse();
     if (response.length === 0) {
-      alert("Mohon centang verifikasi reCAPTCHA.");
+      alert("Please check reCAPTCHA verification.");
       return false;
     } else {
       return true;
