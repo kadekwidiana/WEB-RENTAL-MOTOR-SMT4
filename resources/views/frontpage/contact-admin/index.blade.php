@@ -4,9 +4,10 @@
   <h1>Daftar Pesan</h1>
   
   <div class="table-responsive">
-    <table class="table">
+    <table class="table table-bordered">
       <thead>
         <tr>
+          <th>No.</th>
           <th>Nama</th>
           <th>Email</th>
           <th>Subjek</th>
@@ -17,10 +18,11 @@
       <tbody>
         @foreach ($contacts as $contact)
           <tr>
-            <td class="border">{{ $contact->nama }}</td>
-            <td class="border">{{ $contact->email }}</td>
-            <td class="border">{{ $contact->subjek }}</td>
-            <td class="border">{{ $contact->pesan }}</td>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $contact->nama }}</td>
+            <td>{{ $contact->email }}</td>
+            <td>{{ $contact->subjek }}</td>
+            <td>{{ $contact->pesan }}</td>
             <td class="border text-center">
               <a href="{{ route('contact-admin.show', $contact->id) }}" class="btn btn-primary">Lihat</a>
               <form action="{{ route('contact-admin.destroy', $contact->id) }}" method="POST" style="display: inline-block;">

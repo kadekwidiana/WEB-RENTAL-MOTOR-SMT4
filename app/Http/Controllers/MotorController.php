@@ -183,16 +183,12 @@ class MotorController extends Controller
         $transaksi = Transaksi::where('plat_motor', $plat_motor)->first(); // mencari data transaksi berdasarkan plat_motor
         if ($transaksi) {
             $transaksi->delete();
-
-            $transaksi->delete(); // menghapus data transaksi
         }
 
         // Menghapus transaksi jika data motor yang ingin di hapus ada di transaksi
         $pengeluaran = Pengeluaran::where('plat_motor', $plat_motor)->first(); // mencari data pengeluaran berdasarkan plat_motor
         if ($pengeluaran) {
             $pengeluaran->delete();
-
-            $pengeluaran->delete(); // menghapus data pengeluaran
         }
 
         if ($motor->gambar_motor) {

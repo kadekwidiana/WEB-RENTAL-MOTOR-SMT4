@@ -163,15 +163,24 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
                     Transaksi
                 </a>
-                @endcan
 
-                <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                {{-- daftar pesan --}}
+                <div class="sb-sidenav-menu-heading">Message</div>
+                <a class="nav-link collapsed {{ ($active === "Contact") ? 'active' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#message" aria-expanded="false" aria-controls="message">
+                    <div class="sb-nav-link-icon "><i class="fas fa-solid fa-comment"></i></i></div>
+                    Pesan
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse mb-5" id="message" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                        <a class="nav-link collapsed {{ ($active === "contact") ? 'active' : '' }}" href="{{ route('contact-admin.index') }}">
-                            Daftar Pesan
+                        <a class="nav-link collapsed {{ ($active === "Penyewa") ? 'active' : '' }}" href="{{ route('penyewa.index') }}">
+                            Daftar pesan
                         </a>
                     </nav>
                 </div>
+                @endcan
+
+                
             </div>
             
         </div>

@@ -12,8 +12,8 @@ class ContactController extends Controller
     {
         $contacts = Contact::paginate(10);
         return view('frontpage.contact-admin.index', [
-            'title' => '',
-            'active' => 'ds',
+            'title' => 'Contact admin',
+            'active' => 'Contact',
             'contacts' => $contacts
         ]);
     }

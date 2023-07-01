@@ -127,8 +127,6 @@ class PenyewaController extends Controller
             $motor = Motor::findOrFail($transaksi->plat_motor);
             $motor->status = 1;
             $motor->save();
-
-            $transaksi->delete(); // menghapus data transaksi
         }
 
 
