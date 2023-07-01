@@ -42,7 +42,7 @@
           <th>KM Awal</th>
           <th>KM Akhir</th>
           <th>Jumlah helm</th>
-          <th>Aksi</th>
+          <th>Ket</th>
       </tr>
   </thead>
   <tbody>
@@ -63,7 +63,7 @@
       <td>{{ $transaksi->jumlah_helm }}</td>
 
         <td>
-            <a href="{{ route('transaksi.pengembalian', $transaksi->kode_transaksi) }}" class="btn btn-warning btn-sm mt-1" >Pengembalian</a>
+            <button href="" class="btn btn-outline-success btn-sm mt-1" >Pengembalian success</button>
             
           </td>
       @endif

@@ -7,6 +7,7 @@ use App\Models\Motor;
 use App\Models\Transaksi;
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ReportMotorController extends Controller
 {
@@ -17,7 +18,7 @@ class ReportMotorController extends Controller
         $month = $request->input('month');
         $year = $request->input('year');
 
-        if ($search | $filter | $month | $year) {
+        if ($filter | $month | $year) {
             $paginate = 100;
         } else {
             $paginate = 10;
@@ -30,7 +31,6 @@ class ReportMotorController extends Controller
                     ->orWhere('transaksis.plat_motor', 'like', '%' . $search . '%');
             });
         }
-
 
         if ($filter) {
             $query->where(function ($innerQuery) use ($filter) {
@@ -78,11 +78,11 @@ class ReportMotorController extends Controller
 
     public function detailReportMotor($plat_motor)
     {
-        $motor = Motor::with(['transaksi', 'pengeluaran'])->where('plat_motor', $plat_motor)->first();
+            $motor = Motor::with(['transaksi', 'pengeluaran'])->where('plat_motor', $plat_motor)->first();
 
-        return view('dashboard.report.detail-report-motor', [
-            'title' => 'Detail Laporan Motor',
-            'active' => 'Dashboard'
-        ], compact('motor'));
+            return view('dashboard.report.detail-report-motor', [
+                'title' => 'Detail Laporan Motor',
+                'active' => 'Dashboard'
+            ], compact('motor'));
     }
 }

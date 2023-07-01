@@ -8,5 +8,5 @@
   <p><strong>Subjek:</strong> {{ $contact->subjek }}</p>
   <p><strong>Pesan:</strong> {{ $contact->pesan }}</p>
 
-  <a href="{{ route('contact-admin.index') }}">Kembali</a>
+  <a href="{{ route('contact-admin.index') }}" class="btn btn-primary mb-3">Kembali</a>
 @endsection
