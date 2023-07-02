@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="d-flex">
+{{-- <div class="d-flex">
     <a href="{{ route('transaksi.create') }}" class="btn btn-primary">Tambah Transaksi</a>
 </div>
 
@@ -18,18 +18,18 @@
         </div>
       </div>
     </form>
-  </div>
+  </div> --}}
   {{-- Menampilkan pengembalian --}}
   
-    <button type="button" class="btn btn-outline-warning mb-2 fw-bold text-dark" id="toggleButton">Tampilkan Pengembalian</button>
+    {{-- <button type="button" class="btn btn-outline-warning mb-2 fw-bold text-dark" id="toggleButton">Tampilkan Pengembalian</button> --}}
     {{-- <button type="button" class="btn btn-outline-secondary mb-2 fw-bold text-dark" id="hideButton">Tampilkan sudah di kembalikan</button>
 
     <div class="div3">
       div 3
     </div> --}}
-    <button type="button" class="btn btn-outline-secondary mb-2 fw-bold text-dark" id="hideButton">Tampilkan yang sudah di kembalikan</button>
+    {{-- <button type="button" class="btn btn-outline-secondary mb-2 fw-bold text-dark" id="hideButton">Tampilkan yang sudah di kembalikan</button> --}}
 
-<div id="div3" style="display: none;">
+{{-- <div id="div3" style="display: none;">
   <table  class="table table-bordered">
     <thead>
       <tr>
@@ -73,10 +73,10 @@
 </tbody>
   </table>
 
-</div>
+</div> --}}
 
   {{-- PENYEWAAN --}}
-  <table id="div1" class="table table-bordered">
+  {{-- <table id="div1" class="table table-bordered">
     <thead>
         <tr>
             <th>No.</th>
@@ -118,9 +118,9 @@
                   <button class="btn btn-danger btn-sm mt-1" onclick="return confirm('Hapus data transaksi ini?')">Hapus</button>
                 </form>
               </td>
-        </tr>
+        </tr> --}}
           <!-- Modal Detail Transaksi -->
-        <div class="modal fade" id="{{ $transaksi->kode_transaksi }}" tabindex="-1" aria-labelledby="{{ $transaksi->kode_transaksi }}Label" aria-hidden="true">
+        {{-- <div class="modal fade" id="{{ $transaksi->kode_transaksi }}" tabindex="-1" aria-labelledby="{{ $transaksi->kode_transaksi }}Label" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -147,10 +147,10 @@
         </div>
         @endforeach
     </tbody>
-  </table>
+  </table> --}}
 
   {{-- PENGEMBALIAN --}}
-  <table id="div2" style="display: none;" class="table table-bordered">
+  {{-- <table id="div2" style="display: none;" class="table table-bordered">
     <thead>
         <tr>
             <th>No.</th>
@@ -203,9 +203,9 @@
       <h5 style="font-weight: bold">Data Transaksi belum ada</h5>
       <a href="{{ route('transaksi.create') }}" class="">Buat Transaksi ?</a>
     </div>
-  @endempty
+  @endempty --}}
 
-  <script>
+  {{-- <script>
     // Mengambil referensi elemen tombol dan div
     var toggleButton = document.getElementById("toggleButton");
     var div1 = document.getElementById("div1");
@@ -262,5 +262,5 @@
   
     // Menambahkan event listener untuk tombol
     toggleButton.addEventListener("click", toggleDiv);
-  </script>
+  </script> --}}
 @endsection

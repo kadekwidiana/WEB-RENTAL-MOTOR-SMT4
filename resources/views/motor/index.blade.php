@@ -13,6 +13,7 @@
             <div class="col">
               <form action="{{ route('motor.index') }}" method="GET">
                 <div class="input-group mb-3">
+                  <a href="{{ route('motor.index') }}" class="btn btn-secondary"><i class="fas fa-retweet"></i></a>
                   <select name="filter" id="filter" class="form-select">
                     <option value="">--Filter status--</option>
                     <option value="1" {{ request('filter') == '1' ? 'selected' : '' }}>Tersedia</option>

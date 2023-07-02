@@ -20,9 +20,9 @@
       <div class="col-md-6 wrap-about ftco-animate">
         <div class="heading-section heading-section-white pl-md-5">
           <span class="subheading">About us</span>
-          <h2 class="mb-4">Sewa Motor Bali MURAH & MUDAH</h2>
+          <h2 class="mb-4">EASY & QUALITY Bali Motorbike Rental</h2>
 
-          <p>Sewa motor Bali MURAH dengan unit BERKUALITAS 24 Jam penuh.Rental Kami selalu memastikan kenyamanan bagi pelanggang dengan memberikan beberapa falisitas gratis seperti mengantar kendaraan ke hotel konsumen, memastikan jas hujan tersedia di jok motor, dan gratis bahan bakar.</p>
+          <p>CHEAP Bali motorbike rental with QUALITY units 24 hours a day. Rentals We always ensure comfort for customers by providing several free facilities such as driving the vehicle to the consumer's hotel, ensuring raincoats are available on the motorbike seats, and free fuel.</p>
         </div>
       </div>
     </div>
@@ -33,12 +33,12 @@
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-md-15 text-center heading-section ftco-animate">
-        <h2 class="mb-3">Layanan Rental Motor</h2>
-        <h5 class="mb-3">Sewa motor bisa menjadi pilihan tepat bagi Anda yang mengutamakan kecepatan saat bermobilitas. Moda transportasi ini dapat menempuh jarak dekat maupun jauh relatif lebih lincah daripada moda lainnya, seperti kendaraan roda empat. Menembus kepadatan lalu lintas bukanlah hal sulit bila Anda bepergian dengan sewa motor. Dibandingkan kendaraan lain, sewa motor juga relatif lebih terjangkau dari segi harga. Anda jadi bisa menghemat waktu serta biaya.
+        <h2 class="mb-3">Motorcycle Rental Service</h2>
+        <h5 class="mb-3">Motorcycle rental can be the right choice for those of you who prioritize speed when moving. This mode of transportation can travel short or long distances relatively more agile than other modes, such as four-wheeled vehicles. Breaking through traffic congestion is not difficult if you are traveling by renting a motorbike. Compared to other vehicles, motorbike rental is also relatively more affordable in terms of price. You can save time and costs.
 
-          Lebih jauh, sewa motor bisa menjadi alternatif praktis ketika Anda berwisata ke daerah yang belum memiliki sarana transportasi publik memadai. Tidak berhenti di sana, Anda bisa lebih menyatu dengan lingkungan alam sekitar dengan bepergian menggunakan motor.
-          
-          Dalam hal berwisata, tentunya Anda ingin memaksimalkan waktu saat mengunjungi beberapa destinasi sekaligus. Terlebih lagi, bila liburan Anda tergolong singkat, sewa motor bisa menjadi opsi terbaik. </h5>
+          Furthermore, renting a motorbike can be a practical alternative when you travel to areas that don't yet have adequate public transportation facilities. It doesn't stop there, you can be more at one with the natural environment around you by traveling by motorbike.
+         
+          In terms of traveling, of course you want to maximize your time when visiting several destinations at once. What's more, if your vacation is relatively short, motorbike rental can be the best option.</h5>
       </div>
     </div>
     <div class="row ftco-animate">
@@ -49,7 +49,7 @@
               <div class="user-img mb-2" style="background-image: url(assets/images/icon2.png)">
               </div>
               <div class="text pt-4">
-                <p class="mb-4">Sewa mobil cukup di genggaman Anda, kapan saja dan di mana saja. Bandingkan pilihan mobil dari partner tepercaya kami dengan mudah dan temukan yang sesuai dengan kebutuhan Anda.</p>
+                <p class="mb-4">Rent a motorbike in your hand, anytime and anywhere. Easily compare motorbike options from our trusted partners and find the one that suits your needs.</p>
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@
               <div class="user-img mb-2" style="background-image: url(assets/images/icon3.png)">
               </div>
               <div class="text pt-4">
-                <p class="mb-4">Untuk kondisi kendaraan sendiri kami juga sangat detail mulai dari perawatannya, kebersihannya, hingga mesin-mesinnya. Jadi jangan takut jika kendaraan akan mengalami keluhan selama digunakan.</p>
+                <p class="mb-4">For the condition of the vehicle itself, we are also very detailed, starting from maintenance, cleanliness, to the engines. So don't be afraid if the vehicle will experience complaints during use.</p>
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@
               <div class="user-img mb-2" style="background-image: url(assets/images/icon.png)">
               </div>
               <div class="text pt-4">
-                <p class="mb-4">Untuk memberikan kepuasan kepada konsumen.Motor yang kami sewakan selalu di cek dan dilakukan perawatan berkala ke dealer resmi. Sehingga konsumen bisa menggunakan motor dengan nyaman dan aman selama di Bali.</p>
+                <p class="mb-4">To provide satisfaction to consumers. The motorbikes that we rent are always checked and carried out periodic maintenance to official dealers. So consumers can use motorbikes comfortably and safely while in Bali.</p>
               </div>
             </div>
           </div>

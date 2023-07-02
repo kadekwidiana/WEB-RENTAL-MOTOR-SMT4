@@ -9,6 +9,7 @@
   <div class="col">
     <form action="{{ route('pegawai.index') }}" method="GET">
       <div class="input-group mb-3">
+        <a href="{{ route('pegawai.index') }}" class="btn btn-secondary"><i class="fas fa-retweet"></i></a>
         <select name="filter" id="filter" class="form-select">
           <option value="">--Filter jenis kelamin--</option>
           <option value="Laki-laki" {{ request('filter') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>

@@ -106,11 +106,12 @@
             <div class="col-md-6">
                 <label for="plat_motor">Pilih Motor</label>
                 <select name="plat_motor" id="plat_motor" class="form-control @error('plat_motor') is-invalid @enderror">
-                        <option value="">--Pilih Motor--</option>
-                    @foreach ($motors as $motor)
+                        <option value="{{ $transaksi->plat_motor }}">{{ $transaksi->motor->nama_motor }} {{ $transaksi->plat_motor }}</option>
+                    {{-- @foreach ($motors as $motor)
                             <option value="{{ $motor->plat_motor }}" data-harga="{{ $motor->harga_sewa }}" {{ (old('plat_motor', $motor->plat_motor) == $motor->plat_motor ? 'selected' : '') }}>{{ $motor->nama_motor }}  ( {{ $motor->plat_motor }} )</option>
-                    @endforeach
+                    @endforeach --}}
                 </select>
+                {{-- <input type="text" name="plat_motor" class="form-control" value="{{ $transaksi->motor->plat_motor }}"> --}}
                 @error('plat_motor')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror 
