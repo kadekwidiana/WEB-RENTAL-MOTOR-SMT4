@@ -90,21 +90,46 @@ class PenyewaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $penyewa = Penyewa::findOrFail($id);
+        
+        return view('penyewa.edit', [
+            'title' => 'Edit Data Penyewa',
+            'active' => 'Penyewa'
+        ], compact('penyewa'));
+    }
+/**
+ * Memperbarui data penyewa yang sudah ada.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @param  string  $penyewa
+ * @return \Illuminate\Http\Response
+ */
+public function update(Request $request, $penyewa)
+{
+    $request->validate([
+        'nama_penyewa' => 'required',
+        'email' => 'required|email',
+        'jenis_kelamin' => 'required',
+        'domisili' => 'required',
+        'no_telepon' => 'required',
+    ]);
+
+    $penyewaData = Penyewa::find($penyewa);
+
+    if (!$penyewaData) {
+        return redirect()->route('penyewa.index')->with('error', 'Data penyewa tidak ditemukan.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    $penyewaData->nama_penyewa = $request->nama_penyewa;
+    $penyewaData->email = $request->email;
+    $penyewaData->jenis_kelamin = $request->jenis_kelamin;
+    $penyewaData->domisili = $request->domisili;
+    $penyewaData->no_telepon = $request->no_telepon;
+    $penyewaData->no_sim = $request->no_sim;
+    $penyewaData->save();
 
+    return redirect()->route('penyewa.index')->with('success', 'Data penyewa berhasil diperbarui.');
+}
     /**
      * Remove the specified resource from storage.
      *
