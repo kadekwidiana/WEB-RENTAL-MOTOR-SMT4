@@ -171,12 +171,12 @@
                 </div>
                 <div class="collapse" id="laporan" aria-labelledby="headingOne" data-bs-parent="#laporan">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link {{ ($active === "Laporan") ? 'active' : '' }}" href="">Penyewa</a>
+                        <a class="nav-link {{ ($active === "Laporan") ? 'active' : '' }}" href="{{ route('laporan.penyewa') }}">Penyewa</a>
                     </nav>
                 </div>
                 <div class="collapse" id="laporan" aria-labelledby="headingOne" data-bs-parent="#laporan">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link {{ ($active === "Laporan") ? 'active' : '' }}" href="">Pegawai</a>
+                        <a class="nav-link {{ ($active === "Laporan") ? 'active' : '' }}" href="{{ route('laporan.pegawai') }}">Pegawai</a>
                     </nav>
                 </div>
 

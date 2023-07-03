@@ -72,7 +72,7 @@ var myLineChart = new Chart(ctx, {
                         display: false,
                     },
                     ticks: {
-                        maxTicksLimit: 8,
+                        maxTicksLimit: 12,
                     },
                 },
             ],
@@ -80,7 +80,7 @@ var myLineChart = new Chart(ctx, {
                 {
                     ticks: {
                         min: 0,
-                        max: 2000000,
+                        max: 80000000,
                         maxTicksLimit: 15,
                     },
                     gridLines: {

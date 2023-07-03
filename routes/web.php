@@ -14,6 +14,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Laporan\LaporanMotorController;
+use App\Http\Controllers\Laporan\LaporanPegawaiController;
+use App\Http\Controllers\Laporan\LaporanPenyewaController;
 
 // profile
 Route::get('/profile', [ProfileController::class, 'profile'])->middleware(['auth'])->name('profile');
@@ -72,10 +74,15 @@ Route::middleware('auth',)->group(function () {
                 Route::patch('/pegawai/{id}/update', [UserController::class, 'statusNonAktif'])->name('pegawai.statusNonAktif');
                 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
                 Route::get('/dashboard/report-motor', [ReportMotorController::class, 'reportMotor'])->name('report.motor');
-                Route::get('/dashboard/report-motor/{plat_motor}/detail', [ReportMotorController::class, 'detailReportMotor']);
+                Route::get('/dashboard/report-motor/{plat_motor}/detail', [ReportMotorController::class, 'detailReportMotor'])->name('detailLaporan.motor');
 
                 // laporan 
                 Route::get('/laporanMotor', [LaporanMotorController::class, 'laporanMotor'])->name('laporan.motor');
+                Route::get('/laporanMotor/{plat_motor}/detail', [LaporanMotorController::class, 'detailLaporanMotor']);
+                // laporan pegawai
+                Route::get('/laporanPegawai', [LaporanPegawaiController::class, 'laporanPegawai'])->name('laporan.pegawai');
+                // laporan penyewa
+                Route::get('/laporanPenyewa', [LaporanPenyewaController::class, 'laporanPenyewa'])->name('laporan.penyewa');
             });
         });
 

@@ -17,32 +17,59 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $bulan = Carbon::now();
+        $search = $request->search;
 
-        $totalPendapatan = Transaksi::sum('total');
-        $totalPengeluaran = Pengeluaran::sum('biaya_pengeluaran');
+        // $bulan = '07';
+        // Mendapatkan nilai $request dari pengguna (misalnya melalui form input)
+        $request = isset($_REQUEST['bulan']) ? $_REQUEST['bulan'] : '';
+
+        // Jika $request tidak kosong dan sesuai dengan format yang diinginkan (misalnya 'mm' dengan dua digit), gunakan nilai $request sebagai $bulan
+        if (!empty($request) && preg_match('/^\d{2}$/', $request)) {
+            $bulan = $request;
+        } else {
+            $bulan = Carbon::now()->format('m');
+        }
+        $bulan;
+        // $tahun = '2023';
+        $request2 = isset($_REQUEST['tahun']) ? $_REQUEST['tahun'] : '';
+
+        // Jika $request2 tidak kosong dan sesuai dengan format yang diinginkan (misalnya 'mm' dengan dua digit), gunakan nilai $request2 sebagai $tahun
+        if (!empty($request2) && preg_match('/^\d{4}$/', $request2)) {
+            $tahun = $request2;
+        } else {
+            $tahun = Carbon::now()->format('Y');
+        }
+        $tahun;
+
+        // pendapatan&pengeluaran sesuai req
+        $totalPendapatan = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', $bulan)->whereYear('tgl_selesai', $tahun)->sum('total');
+
+        $totalPengeluaran = Pengeluaran::whereMonth('tgl_pengeluaran', $bulan)->whereYear('tgl_pengeluaran', $tahun)->sum('biaya_pengeluaran');
 
         $totalMotor = Motor::count();
         $totalPegawai = User::count();
-        $totalPenyewa = Penyewa::count();
-        $totalPengeluaranMotor = Pengeluaran::count();
-        $totalTransaksi = Transaksi::count();
+        $totalPenyewa = Penyewa::whereHas('transaksi', function ($query) use ($bulan, $tahun) {
+            $query->whereMonth('tgl_mulai', $bulan)
+                ->whereYear('tgl_mulai', $tahun);
+        })->count();
+        $totalPengeluaranMotor = Pengeluaran::whereMonth('tgl_pengeluaran', $bulan)->whereYear('tgl_pengeluaran', $tahun)->count();
+        $totalTransaksi = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', $bulan)->whereYear('tgl_selesai', $tahun)->count();
 
-        // Pendapatan per bulan
-        $totalBulanJanuari = Transaksi::whereMonth('tgl_selesai', '=', '01')->sum('total');
-        $totalBulanFebruari = Transaksi::whereMonth('tgl_selesai', '=', '02')->sum('total');
-        $totalBulanMaret = Transaksi::whereMonth('tgl_selesai', '=', '03')->sum('total');
-        $totalBulanApril = Transaksi::whereMonth('tgl_selesai', '=', '04')->sum('total');
-        $totalBulanMei = Transaksi::whereMonth('tgl_selesai', '=', '05')->sum('total');
-        $totalBulanJuni = Transaksi::whereMonth('tgl_selesai', '=', '06')->sum('total');
-        $totalBulanJuli = Transaksi::whereMonth('tgl_selesai', '=', '07')->sum('total');
-        $totalBulanAgustus = Transaksi::whereMonth('tgl_selesai', '=', '08')->sum('total');
-        $totalBulanSeptember = Transaksi::whereMonth('tgl_selesai', '=', '09')->sum('total');
-        $totalBulanOktober = Transaksi::whereMonth('tgl_selesai', '=', '10')->sum('total');
-        $totalBulanNovember = Transaksi::whereMonth('tgl_selesai', '=', '11')->sum('total');
-        $totalBulanDesember = Transaksi::whereMonth('tgl_selesai', '=', '12')->sum('total');
+        // Pendapatan per bulan berdasarkan tahun req
+        $totalBulanJanuari = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '01')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanFebruari = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '02')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanMaret = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '03')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanApril = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '04')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanMei = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '05')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanJuni = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '06')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanJuli = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '07')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanAgustus = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '08')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanSeptember = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '09')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanOktober = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '10')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanNovember = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '11')->whereYear('tgl_selesai', $tahun)->sum('total');
+        $totalBulanDesember = Transaksi::where('status_transaksi', 1)->whereMonth('tgl_selesai', '=', '12')->whereYear('tgl_selesai', $tahun)->sum('total');
         return view('dashboard.index', [
             'title' => 'Dashboard',
             'active' => 'Dashboard'
@@ -61,6 +88,8 @@ class DashboardController extends Controller
                 'totalBulanOktober',
                 'totalBulanNovember',
                 'totalBulanDesember',
+                'bulan',
+                'tahun'
             ]
         ));
     }

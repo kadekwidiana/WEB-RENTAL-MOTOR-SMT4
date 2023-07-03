@@ -1,12 +1,54 @@
 @extends('layouts.main2')
 @section('content')
 <div class="container-fluid px-4">
-  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    <div class="row mb-2">
+        <div class="col-4">
+          <form action="{{ route('dashboard.index') }}" method="GET">
+            <div class="input-group mb-2">
+              <a href="{{ route('dashboard.index') }}" class="btn btn-secondary"><i class="fas fa-retweet"></i></a>
+              <select name="bulan" id="bulan" class="form-select" required>
+                <option value="">--Bulan--</option>
+                <option value="01" {{ request('bulan') == '01' ? 'selected' : '' }}>Januari</option>
+                <option value="02" {{ request('bulan') == '02' ? 'selected' : '' }}>Februari</option>
+                <option value="03" {{ request('bulan') == '03' ? 'selected' : '' }}>Maret</option>
+                <option value="04" {{ request('bulan') == '04' ? 'selected' : '' }}>April</option>
+                <option value="05" {{ request('bulan') == '05' ? 'selected' : '' }}>Mei</option>
+                <option value="06" {{ request('bulan') == '06' ? 'selected' : '' }}>Juni</option>
+                <option value="07" {{ request('bulan') == '07' ? 'selected' : '' }}>Juli</option>
+                <option value="08" {{ request('bulan') == '08' ? 'selected' : '' }}>Agustus</option>
+                <option value="09" {{ request('bulan') == '09' ? 'selected' : '' }}>September</option>
+                <option value="10" {{ request('bulan') == '10' ? 'selected' : '' }}>Oktober</option>
+                <option value="11" {{ request('bulan') == '11' ? 'selected' : '' }}>November</option>
+                <option value="12" {{ request('bulan') == '12' ? 'selected' : '' }}>Desember</option>
+              </select>
+              <select name="tahun" id="tahun" class="form-select" required>
+                <option value="">--Tahun--</option>
+                <option value="2022" {{ request('tahun') == '2022' ? 'selected' : '' }}>2022</option>
+                <option value="2023" {{ request('tahun') == '2023' ? 'selected' : '' }}>2023</option>
+                <option value="2024" {{ request('tahun') == '2024' ? 'selected' : '' }}>2024</option>
+                <option value="2025" {{ request('tahun') == '2025' ? 'selected' : '' }}>2025</option>
+              </select>
+              <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fas fa-filter"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+      @php
+            $dateMonth = $bulan;
+            $dateYear = $tahun;
+            $dateTimeMonth = DateTime::createFromFormat('m', $dateMonth);
+            $dateTimeYear = DateTime::createFromFormat('Y', $dateYear);
+            $month = $dateTimeMonth->format('F');
+            $year = $dateTimeYear->format('Y');
+            
+        @endphp
+            <h4>{{$month}} {{ $year }}</h4>
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mt-2">
       <div class="col">
           <div class="card bg-primary text-white mb-4">
               <div class="card-body">{{ $totalMotor }} Motor</div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                  <a class="small text-white stretched-link" href="/dashboard/report-motor">Details</a>
+                  <a class="small text-white stretched-link" href="{{ route('laporan.motor') }}">Details</a>
                   <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
           </div>
@@ -15,7 +57,7 @@
           <div class="card bg-warning text-white mb-4">
               <div class="card-body">{{ $totalPegawai }} Pegawai</div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                  <a class="small text-white stretched-link" href="/pegawai">Details</a>
+                  <a class="small text-white stretched-link" href="{{ route('laporan.pegawai') }}">Details</a>
                   <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
           </div>
@@ -24,7 +66,7 @@
           <div class="card bg-info text-white mb-4">
               <div class="card-body">{{ $totalPenyewa }} Penyewa</div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                  <a class="small text-white stretched-link" href="/penyewa">Details</a>
+                  <a class="small text-white stretched-link" href="{{ route('laporan.penyewa') }}">Details</a>
                   <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
           </div>
@@ -33,7 +75,7 @@
           <div class="card bg-success text-white mb-4">
               <div class="card-body">{{ $totalTransaksi }} Transaksi</div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                  <a class="small text-white stretched-link" href="/transaksi">Details</a>
+                  <a class="small text-white stretched-link" href="{{ route('transaksi.listRiwayatTransaksi') }}">Details</a>
                   <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
           </div>
@@ -42,7 +84,7 @@
           <div class="card bg-danger text-white mb-4">
               <div class="card-body">{{ $totalPengeluaranMotor }} Pengeluaran</div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                  <a class="small text-white stretched-link" href="/pengeluaran">Details</a>
+                  <a class="small text-white stretched-link" href="{{ route('pengeluaran.index') }}">Details</a>
                   <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
           </div>

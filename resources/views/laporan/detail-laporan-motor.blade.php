@@ -2,14 +2,12 @@
 
 @section('content')
 <div class="container">
-    {{-- filter/pencarian --}}
-    <div class="row mb-2">
-        {{-- filter/pencarian --}}
+    <dl class="row">
         <div class="row mb-2">
-            <div class="col">
-              <form action="{{ route('laporan.pegawai') }}" method="GET">
+            <div class="col-4">
+              <form action="/laporanMotor/{{ $motor->plat_motor }}/detail" method="GET">
                 <div class="input-group mb-3">
-                  <a href="{{ route('laporan.pegawai') }}" class="btn btn-secondary"><i class="fas fa-retweet"></i></a>
+                  <a href="/laporanMotor/{{ $motor->plat_motor }}/detail" class="btn btn-secondary"><i class="fas fa-retweet"></i></a>
                   <select name="bulan" id="bulan" class="form-select" required>
                     <option value="">--Bulan--</option>
                     <option value="01" {{ request('bulan') == '01' ? 'selected' : '' }}>Januari</option>
@@ -36,16 +34,6 @@
                 </div>
               </form>
             </div>
-  
-            {{-- Pencarian pengeluaran --}}
-            <div class="col-8">
-              <form action="{{ route('laporan.pegawai') }}" method="GET">
-              <div class="input-group mb-3">
-                <input name="search" type="text" value="{{ request('search') }}" class="form-control" placeholder="Cari...">
-                <button class="btn btn-secondary" type="submit" id="button-addon2">Cari</button>
-              </div>
-            </form>
-            </div>
           </div>
           @php
               $dateMonth = $bulan;
@@ -57,57 +45,71 @@
               
             @endphp
               <h4>{{$month}} {{ $year }}</h4>
-    <table class="table">
-        <thead>
-            <table class="table table-bordered">
-            <tr class="text-center">
-                <th>No.</th>
-                <th>Nama Pegawai</th>
-                <th>Jumlah Transaksi</th>
-                <th>Jumlah Pengeluaran</th>
-                <th>Ket / Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($pegawais as $pegawai)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>
-                        {{ $pegawai->nama_pegawai }}
-                    </td>
-                    <td>
-                        @php
-                            $jumlahTransaksi = $pegawai->transaksi()->where('status_transaksi', 1)->whereMonth('tgl_selesai', $bulan)->whereYear('tgl_selesai', $tahun)->count();
+        <dt class="col-sm-1"></dt>
+        <dd class="col-sm-9"> 
+            <img src="{{ asset('storage/' . $motor->gambar_motor) }}" width="200" alt="">
+        </dd>
 
-                            echo number_format($jumlahTransaksi, 0, ',', '.')
-                        @endphp
-                    </td>
-                    <td>
-                        @php
-                            $jumlahPengeluaran = $pegawai->pengeluaran()->whereMonth('tgl_pengeluaran', $bulan)->whereYear('tgl_pengeluaran', $tahun)->count();
+        <dt class="col-sm-3">Merek Motor</dt>
+        <dd class="col-sm-9">: {{ $motor->nama_motor }} {{ $motor->cc }} cc.  ({{ $motor->plat_motor }})</dd>
 
-                            echo number_format($jumlahPengeluaran, 0, ',', '.')
-                        @endphp
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <a href="" class="btn btn-sm btn-info me-2">
-                                Detail
-                            </a>
-                            {{-- <a class="btn btn-sm btn-warning me-2">
-                                <i class="fas fa-print"></i>
-                            </a> --}}
-                            
-                        </div>
-                    </td>
-                  </tr>
+        <dt class="col-sm-3">Nama Pemilik</dt>
+        <dd class="col-sm-9">: {{ $motor->nama_pemilik }}</dd>
+      
+        <hr class="divider" />
+        <dt class="col-sm-3">Pemasukan</dt>
+        <dd class="col-sm-9">: Rp. 
+            @php
+                $pemasukan = $motor->transaksi->sum('total');
+                echo number_format($pemasukan, 0, ',', '.')
+            @endphp
+        </dd>
+
+        <dt class="col-sm-3">Tanggal Pemasukan</dt>
+        <dd class="col-sm-9">:  
+            @foreach ($motor->transaksi as $data)
+                {{ date('d F Y', strtotime($data->tgl_selesai)) }}, 
             @endforeach
+        </dd>
+
+        <dt class="col-sm-3">Daftar Penyewa</dt>
+        <dd class="col-sm-9"> :
+            @foreach ($motor->transaksi as $data)
+                {{ $data->penyewa->nama_penyewa }}, 
+            @endforeach
+        </dd>
+
+        <hr class="divider" />
+        <dt class="col-sm-3">Tgl dan Jenis Pengeluaran</dt>
+        <dd class="col-sm-9">:  
+            @foreach ($motor->pengeluaran as $data)
+                {{ date('d F Y', strtotime($data->tgl_pengeluaran)) }} {{ $data->jenis_pengeluaran }}, 
+            @endforeach
+        </dd>
+
+        <dt class="col-sm-3">Biaya Pengeluaran</dt>
+        <dd class="col-sm-9">: Rp. 
+            @php
+                $pengeluaran = $motor->pengeluaran->sum('biaya_pengeluaran');
+                echo number_format($pengeluaran, 0, ',', '.')
+            @endphp
+        </dd>
+
+        <hr class="divider" />
+        <dt class="col-sm-3">Total Penghasilan</dt>
+        <dd class="col-sm-9">: Rp. {{ number_format($pemasukan - $pengeluaran, 0, ',', '.') }}</dd>
+      
+        <hr class="divider" />
+        <div class="d-flex justify-content-start align-items-start">
+            <a href="/dashboard/report-motor" class="btn btn-danger me-2">
+                Kembali
+            </a>
+            <a class="btn btn-warning me-2">
+                Print <i class="fas fa-print"></i>
+            </a>
             
-        </tbody>
-    </table>
+        </div>
+      </dl>
 </div>
 
-<div class="d-flex justify-content-end mt-2">
-    {{ $pegawais->links() }}
-</div>
 @endsection
