@@ -47,6 +47,8 @@ Route::middleware('auth',)->group(function () {
         Route::get('/motor', [MotorController::class, 'index'])->name('motor.index');
         // Penyewa
         Route::resource('/penyewa', PenyewaController::class);
+        Route::put('/penyewa/{no_paspor}', [PenyewaController::class, 'update'])->name('penyewa.update');
+
         // Pengeluaran
         Route::get('/pengeluarans', [PengeluaranController::class, 'index'])->name('pengeluaran.index');
 

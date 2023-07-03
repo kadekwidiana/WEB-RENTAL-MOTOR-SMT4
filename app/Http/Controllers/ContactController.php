@@ -12,7 +12,7 @@ class ContactController extends Controller
     {
         $contacts = Contact::paginate(10);
         return view('frontpage.contact-admin.index', [
-            'title' => 'Contact admin',
+            'title' => 'Daftar Pesan',
             'active' => 'Contact',
             'contacts' => $contacts
         ]);

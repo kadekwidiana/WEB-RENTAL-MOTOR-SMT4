@@ -20,8 +20,8 @@
       <div class="col-md-6 wrap-about ftco-animate">
         <div class="heading-section heading-section-white pl-md-5">
           <span class="subheading">About us</span>
-          <h2 class="mb-4">EASY & QUALITY Bali Motorbike Rental</h2>
 
+          <h2 class="mb-4">EASY & QUALITY Bali Motorbike Rental</h2>
           <p>CHEAP Bali motorbike rental with QUALITY units 24 hours a day. Rentals We always ensure comfort for customers by providing several free facilities such as driving the vehicle to the consumer's hotel, ensuring raincoats are available on the motorbike seats, and free fuel.</p>
         </div>
       </div>
@@ -34,11 +34,13 @@
     <div class="row justify-content-center mb-5">
       <div class="col-md-15 text-center heading-section ftco-animate">
         <h2 class="mb-3">Motorcycle Rental Service</h2>
+
         <h5 class="mb-3">Motorcycle rental can be the right choice for those of you who prioritize speed when moving. This mode of transportation can travel short or long distances relatively more agile than other modes, such as four-wheeled vehicles. Breaking through traffic congestion is not difficult if you are traveling by renting a motorbike. Compared to other vehicles, motorbike rental is also relatively more affordable in terms of price. You can save time and costs.
 
           Furthermore, renting a motorbike can be a practical alternative when you travel to areas that don't yet have adequate public transportation facilities. It doesn't stop there, you can be more at one with the natural environment around you by traveling by motorbike.
          
           In terms of traveling, of course you want to maximize your time when visiting several destinations at once. What's more, if your vacation is relatively short, motorbike rental can be the best option.</h5>
+
       </div>
     </div>
     <div class="row ftco-animate">
