@@ -12,6 +12,7 @@
           <div class="col">
             <form action="{{ route('pengeluaran.index') }}" method="GET">
               <div class="input-group mb-3">
+                <a href="{{ route('pengeluaran.index') }}" class="btn btn-secondary"><i class="fas fa-retweet"></i></a>
                 <select name="month" id="month" class="form-select" required>
                   <option value="">--Bulan--</option>
                   <option value="01" {{ request('month') == '01' ? 'selected' : '' }}>Januari</option>

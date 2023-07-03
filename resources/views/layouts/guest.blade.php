@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Home | Login</title>
+        <title>Rental | Login</title>
         <link rel="icon" href="{{ asset('assets/images/damar_logo.png') }}" type="image/x-icon">
 
         <!-- Fonts -->

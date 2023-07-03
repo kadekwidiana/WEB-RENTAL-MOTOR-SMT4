@@ -13,7 +13,7 @@ use App\Http\Controllers\Report\ReportMotorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Controllers\Laporan\LaporanMotorController;
 
 // profile
 Route::get('/profile', [ProfileController::class, 'profile'])->middleware(['auth'])->name('profile');
@@ -31,6 +31,14 @@ Route::middleware('auth',)->group(function () {
     Route::middleware('admin')->group(function () {
         // Transaksi
         Route::resource('/transaksi', TransaksiController::class);
+
+        // view penyewaan
+        Route::get('/penyewaan', [TransaksiController::class, 'penyewaan'])->name('transaksi.penyewaan');
+        // view pengembalian
+        Route::get('/pengembalian', [TransaksiController::class, 'listPengembalian'])->name('transaksi.listPengembalian');
+        // view riwayat transaksi
+        Route::get('/riwayatTransaksi', [TransaksiController::class, 'listRiwayatTransaksi'])->name('transaksi.listRiwayatTransaksi');
+
         Route::get('/transaksi/{kode_transaksi}/pengembalian', [TransaksiController::class, 'pengembalianForm'])->name('transaksi.pengembalianForm');
         Route::post('/transaksi/{kode_transaksi}/pengembalian', [TransaksiController::class, 'pengembalian'])->name('transaksi.pengembalian');
         Route::get('/transaksi/create/data-transaksi', [TransaksiController::class, 'viewadd'])->name('transaksi.viewadd');
@@ -67,6 +75,9 @@ Route::middleware('auth',)->group(function () {
                 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
                 Route::get('/dashboard/report-motor', [ReportMotorController::class, 'reportMotor'])->name('report.motor');
                 Route::get('/dashboard/report-motor/{plat_motor}/detail', [ReportMotorController::class, 'detailReportMotor']);
+
+                // laporan 
+                Route::get('/laporanMotor', [LaporanMotorController::class, 'laporanMotor'])->name('laporan.motor');
             });
         });
 
@@ -81,5 +92,3 @@ Route::get('/about', [FrontPageController::class, 'viewAbout'])->name('frontpage
 Route::get('/view-motor', [FrontPageController::class, 'viewMotor'])->name('frontpage.motors');
 Route::get('/contact', [FrontPageController::class, 'viewContact'])->name('frontpage.contact');
 Route::resource('contact-admin', ContactController::class);
-
-

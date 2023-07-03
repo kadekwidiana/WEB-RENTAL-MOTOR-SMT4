@@ -9,47 +9,34 @@
             <div class="col">
               <form action="{{ route('report.motor') }}" method="GET">
                 <div class="input-group mb-3">
-                  <select name="month" id="month" class="form-select" required>
+                  <a href="{{ route('report.motor') }}" class="btn btn-secondary"><i class="fas fa-retweet"></i></a>
+                  <select name="bulan" id="bulan" class="form-select" required>
                     <option value="">--Bulan--</option>
-                    <option value="01" {{ request('month') == '01' ? 'selected' : '' }}>Januari</option>
-                    <option value="02" {{ request('month') == '02' ? 'selected' : '' }}>Februari</option>
-                    <option value="03" {{ request('month') == '03' ? 'selected' : '' }}>Maret</option>
-                    <option value="04" {{ request('month') == '04' ? 'selected' : '' }}>April</option>
-                    <option value="05" {{ request('month') == '05' ? 'selected' : '' }}>Mei</option>
-                    <option value="06" {{ request('month') == '06' ? 'selected' : '' }}>Juni</option>
-                    <option value="07" {{ request('month') == '07' ? 'selected' : '' }}>Juli</option>
-                    <option value="08" {{ request('month') == '08' ? 'selected' : '' }}>Agustus</option>
-                    <option value="09" {{ request('month') == '09' ? 'selected' : '' }}>September</option>
-                    <option value="10" {{ request('month') == '10' ? 'selected' : '' }}>Oktober</option>
-                    <option value="11" {{ request('month') == '11' ? 'selected' : '' }}>November</option>
-                    <option value="12" {{ request('month') == '12' ? 'selected' : '' }}>Desember</option>
+                    <option value="01" {{ request('bulan') == '01' ? 'selected' : '' }}>Januari</option>
+                    <option value="02" {{ request('bulan') == '02' ? 'selected' : '' }}>Februari</option>
+                    <option value="03" {{ request('bulan') == '03' ? 'selected' : '' }}>Maret</option>
+                    <option value="04" {{ request('bulan') == '04' ? 'selected' : '' }}>April</option>
+                    <option value="05" {{ request('bulan') == '05' ? 'selected' : '' }}>Mei</option>
+                    <option value="06" {{ request('bulan') == '06' ? 'selected' : '' }}>Juni</option>
+                    <option value="07" {{ request('bulan') == '07' ? 'selected' : '' }}>Juli</option>
+                    <option value="08" {{ request('bulan') == '08' ? 'selected' : '' }}>Agustus</option>
+                    <option value="09" {{ request('bulan') == '09' ? 'selected' : '' }}>September</option>
+                    <option value="10" {{ request('bulan') == '10' ? 'selected' : '' }}>Oktober</option>
+                    <option value="11" {{ request('bulan') == '11' ? 'selected' : '' }}>November</option>
+                    <option value="12" {{ request('bulan') == '12' ? 'selected' : '' }}>Desember</option>
                   </select>
-                  <select name="year" id="year" class="form-select" required>
+                  <select name="tahun" id="tahun" class="form-select" required>
                     <option value="">--Tahun--</option>
-                    <option value="2022" {{ request('year') == '2022' ? 'selected' : '' }}>2022</option>
-                    <option value="2023" {{ request('year') == '2023' ? 'selected' : '' }}>2023</option>
-                    <option value="2024" {{ request('year') == '2024' ? 'selected' : '' }}>2024</option>
-                    <option value="2025" {{ request('year') == '2025' ? 'selected' : '' }}>2025</option>
+                    <option value="2022" {{ request('tahun') == '2022' ? 'selected' : '' }}>2022</option>
+                    <option value="2023" {{ request('tahun') == '2023' ? 'selected' : '' }}>2023</option>
+                    <option value="2024" {{ request('tahun') == '2024' ? 'selected' : '' }}>2024</option>
+                    <option value="2025" {{ request('tahun') == '2025' ? 'selected' : '' }}>2025</option>
                   </select>
                   <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fas fa-filter"></i></button>
                 </div>
               </form>
             </div>
   
-            {{-- <div class="col">
-              <form action="{{ route('report.motor') }}" method="GET">
-                <div class="input-group mb-3">
-                  <select name="filter" id="filter" class="form-select">
-                    <option value="">--Filter motor--</option>
-                    @foreach (['Beat', 'Vario', 'Nmax', 'PCX', 'Scoopy', 'Fazzio', 'ADV'] as $item)
-                      <option value="{{ $item }}" {{ request('filter') == $item ? 'selected' : ''  }}>{{ $item }}</option>
-                    @endforeach
-                    
-                  </select>
-                  <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fas fa-filter"></i></button>
-                </div>
-              </form>
-            </div> --}}
             {{-- Pencarian pengeluaran --}}
             <div class="col-8">
               <form action="{{ route('report.motor') }}" method="GET">
@@ -60,6 +47,22 @@
             </form>
             </div>
           </div>
+          @php
+              $dateMonth = $bulan;
+              $dateYear = $tahun;
+              $dateTimeMonth = DateTime::createFromFormat('m', $dateMonth);
+              $dateTimeYear = DateTime::createFromFormat('Y', $dateYear);
+              $month = $dateTimeMonth->format('F');
+              $year = $dateTimeYear->format('Y');
+              
+            @endphp
+              <h4>{{$month}} {{ $year }}</h4>
+              <dt class="col-sm-2">Pemasukan</dt>
+              <dd class="col-sm-9">: Rp. {{ number_format($totalPemasukan, 0, ',', '.') }} </dd>
+              <dt class="col-sm-2">Pengeluaran</dt>
+              <dd class="col-sm-9">: Rp. {{ number_format($totalPengeluaran, 0, ',', '.') }} </dd>
+              <dt class="col-sm-2">Total</dt>
+              <dd class="col-sm-9">: Rp. {{ number_format($totalPemasukan - $totalPengeluaran, 0, ',', '.') }} </dd>
     <table class="table">
         <thead>
             <table class="table table-bordered text-center">
@@ -76,16 +79,26 @@
             @foreach ($motors as $motor)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $motor->nama_motor }} ({{ $motor->plat_motor }})</td>
+                    <td>
+                        {{ $motor->nama_motor }} ({{ $motor->plat_motor }})
+                    </td>
                     <td>
                         @php
-                            $pemasukan = $motor->transaksi->sum('total');
+                            // use Carbon;
+
+                          $currentMonth = Carbon\Carbon::now()->format('m');
+
+                          $pemasukan = $motor->transaksi()->where('status_transaksi', 1)->whereMonth('tgl_selesai', $bulan)->whereYear('tgl_selesai', $tahun)->sum('total');
+
                             echo number_format($pemasukan, 0, ',', '.')
                         @endphp
                     </td>
                     <td>
                         @php
-                            $pengeluaran = $motor->pengeluaran->sum('biaya_pengeluaran');
+                            // $pengeluaran = $motor->pengeluaran->sum('biaya_pengeluaran');
+                            $currentMonth = Carbon\Carbon::now()->format('m');
+
+                          $pengeluaran = $motor->pengeluaran()->whereMonth('tgl_pengeluaran', $bulan)->whereYear('tgl_pengeluaran', $tahun)->sum('biaya_pengeluaran');
                             echo number_format($pengeluaran, 0, ',', '.')
                         @endphp
                     </td>
@@ -101,7 +114,7 @@
                             
                         </div>
                     </td>
-                </tr>
+                  </tr>
             @endforeach
             
         </tbody>

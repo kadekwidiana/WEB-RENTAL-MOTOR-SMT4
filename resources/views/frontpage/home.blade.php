@@ -65,7 +65,9 @@
           <span class="subheading">About us</span>
           <h2 class="mb-4">Bali motorbike rental is CHEAP & EASY</h2>
           <p>CHEAP Bali motorbike rental with QUALITY units 24 hours a day. Rentals We always ensure comfort for customers by providing several free facilities such as driving the vehicle to the consumer's hotel, ensuring raincoats are available on the motorbike seats, and free fuel.</p>
+
           <p><a href="/about" class="btn btn-primary py-3 px-4">Read more...</a></p>
+          
         </div>
       </div>
     </div>

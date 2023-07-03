@@ -38,6 +38,156 @@ class TransaksiController extends Controller
         ], compact('transaksis', 'totalTransaksi'));
     }
 
+    // VIEW PENYEWAAN
+    public function penyewaan(Request $request)
+    {
+        $search = $request->search;
+        $date = $request->input('date');
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        $query = Transaksi::query();
+
+        if ($search) {
+            $query->where(function ($innerQuery) use ($search) {
+                $innerQuery->where('plat_motor', 'like', '%' . $search . '%')
+                    ->orWhereHas('motor', function ($q) use ($search) {
+                        $q->where('nama_motor', 'like', '%' . $search . '%');
+                    })
+                    ->orWhere(function ($query) use ($search) {
+                        $query->where('no_paspor', 'like', '%' . $search . '%')
+                            ->orWhereHas('penyewa', function ($query) use ($search) {
+                                $query->where('nama_penyewa', 'like', '%' . $search . '%');
+                            });
+                    });
+            });
+        }
+
+        if ($date) {
+            $query->where(function ($innerQuery) use ($date) {
+                $innerQuery->whereDate('tgl_mulai', $date);
+            });
+        }
+        if ($month) {
+            $query->where(function ($innerQuery) use ($month) {
+                // $innerQuery->where('tgl_pengeluaran', 'like', '%' . $month . '%');
+                $innerQuery->whereMonth('tgl_mulai', $month);
+            });
+        }
+        if ($year) {
+            $query->where(function ($innerQuery) use ($year) {
+                $innerQuery->whereYear('tgl_mulai', $year);
+            });
+        }
+
+        $transaksis = $query->latest()->paginate(10);
+
+        return view('transaksi.list.penyewaan', [
+            'title' => 'Data Penyewaan',
+            'active' => 'Transaksi'
+        ], compact('transaksis'));
+    }
+
+    // VIEW PENGEMBALIAN
+    public function listPengembalian(Request $request)
+    {
+        $search = $request->search;
+        $date = $request->input('date');
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        $query = Transaksi::query();
+
+        if ($search) {
+            $query->where(function ($innerQuery) use ($search) {
+                $innerQuery->where('plat_motor', 'like', '%' . $search . '%')
+                    ->orWhereHas('motor', function ($q) use ($search) {
+                        $q->where('nama_motor', 'like', '%' . $search . '%');
+                    })
+                    ->orWhere(function ($query) use ($search) {
+                        $query->where('no_paspor', 'like', '%' . $search . '%')
+                            ->orWhereHas('penyewa', function ($query) use ($search) {
+                                $query->where('nama_penyewa', 'like', '%' . $search . '%');
+                            });
+                    });
+            });
+        }
+
+        if ($date) {
+            $query->where(function ($innerQuery) use ($date) {
+                $innerQuery->whereDate('tgl_mulai', $date);
+            });
+        }
+        if ($month) {
+            $query->where(function ($innerQuery) use ($month) {
+                // $innerQuery->where('tgl_pengeluaran', 'like', '%' . $month . '%');
+                $innerQuery->whereMonth('tgl_mulai', $month);
+            });
+        }
+        if ($year) {
+            $query->where(function ($innerQuery) use ($year) {
+                $innerQuery->whereYear('tgl_mulai', $year);
+            });
+        }
+
+        $transaksis = $query->latest()->paginate(10);
+
+        return view('transaksi.list.pengembalian', [
+            'title' => 'Pengembalian',
+            'active' => 'Transaksi'
+        ], compact('transaksis'));
+    }
+
+    // VIEW RIWAYAT TRANSAKSI
+    public function listRiwayatTransaksi(Request $request)
+    {
+        $search = $request->search;
+        $date = $request->input('date');
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        $query = Transaksi::query();
+
+        if ($search) {
+            $query->where(function ($innerQuery) use ($search) {
+                $innerQuery->where('plat_motor', 'like', '%' . $search . '%')
+                    ->orWhereHas('motor', function ($q) use ($search) {
+                        $q->where('nama_motor', 'like', '%' . $search . '%');
+                    })
+                    ->orWhere(function ($query) use ($search) {
+                        $query->where('no_paspor', 'like', '%' . $search . '%')
+                            ->orWhereHas('penyewa', function ($query) use ($search) {
+                                $query->where('nama_penyewa', 'like', '%' . $search . '%');
+                            });
+                    });
+            });
+        }
+
+        if ($date) {
+            $query->where(function ($innerQuery) use ($date) {
+                $innerQuery->whereDate('tgl_mulai', $date);
+            });
+        }
+        if ($month) {
+            $query->where(function ($innerQuery) use ($month) {
+                // $innerQuery->where('tgl_pengeluaran', 'like', '%' . $month . '%');
+                $innerQuery->whereMonth('tgl_mulai', $month);
+            });
+        }
+        if ($year) {
+            $query->where(function ($innerQuery) use ($year) {
+                $innerQuery->whereYear('tgl_mulai', $year);
+            });
+        }
+
+        $transaksis = $query->latest()->paginate(10);
+
+        return view('transaksi.list.riwayat-transaksi', [
+            'title' => 'Riwayat Transaksi',
+            'active' => 'Transaksi'
+        ], compact('transaksis'));
+    }
+
     public function create()
     {
         $transaksi = new Transaksi();
@@ -74,7 +224,6 @@ class TransaksiController extends Controller
             'km_akhir' => 'required',
             'jumlah_helm' => 'required|numeric',
             'catatan' => 'required',
-            'status_transaksi' => 'required'
         ]);
 
         $penyewa = new Penyewa();
@@ -111,7 +260,7 @@ class TransaksiController extends Controller
 
         // Transaksi::create($request->all());
 
-        return redirect()->route('transaksi.index')
+        return redirect()->route('transaksi.penyewaan')
             ->with('success', 'Transaksi berhasil di buat.');
     }
 
@@ -174,7 +323,7 @@ class TransaksiController extends Controller
         $motor->status = 0;
         $motor->save();
 
-        return redirect()->route('transaksi.index')
+        return redirect()->route('transaksi.penyewaan')
             ->with('success', 'Transaksi berhasil di buat.');
     }
 
@@ -243,9 +392,10 @@ class TransaksiController extends Controller
         // $transaksi = Transaksi::where('kode_transaksi', $kode_transaksi)->first();
         // $transaksi->update($request->all());
 
-        return redirect()->route('transaksi.index')
-            ->with('success', 'Transaksi Pengembalian motor berhasil.');
+        return redirect()->route('transaksi.listPengembalian')
+            ->with('success', 'Transaksi Pengembalian motor berhasil. Silahkan cek di riwayat transaksi!');
     }
+
     // menampilkan view pengembalian
     public function pengembalianForm($kode_transaksi)
     {
@@ -323,11 +473,11 @@ class TransaksiController extends Controller
         $transaksi->km_akhir = $validated['km_akhir'];
         $transaksi->catatan = $validated['catatan'];
         $transaksi->jumlah_helm = $validated['jumlah_helm'];
-        $transaksi->status_transaksi = 1;
+        $transaksi->status_transaksi = 0;
         $transaksi->update();
         // $transaksi->update($request->all());
 
-        return redirect()->route('transaksi.index')
+        return redirect()->route('transaksi.penyewaan')
             ->with('success', 'Transaksi berhasil di edit.');
     }
 
@@ -342,7 +492,7 @@ class TransaksiController extends Controller
 
         $transaksi->delete();
 
-        return redirect()->route('transaksi.index')
+        return redirect()->route('transaksi.penyewaan')
             ->with('success', 'Transaksi berhasil di hapus.');
     }
 }
