@@ -57,6 +57,8 @@
               
             @endphp
               <h4>{{$month}} {{ $year }}</h4>
+              <dt class="col-sm-2">Jumlah Transaksi</dt>
+              <dd class="col-sm-9">: {{ number_format($jumlahTransaksi, 0, ',', '.') }} Transaksi</dd>
               <dt class="col-sm-2">Pemasukan</dt>
               <dd class="col-sm-9">: Rp. {{ number_format($totalPemasukan, 0, ',', '.') }} </dd>
               <dt class="col-sm-2">Pengeluaran</dt>
@@ -108,9 +110,9 @@
                             <a href="/dashboard/report-motor/{{ $motor->plat_motor }}/detail" class="btn btn-sm btn-info me-2">
                                 Detail
                             </a>
-                            <a class="btn btn-sm btn-warning me-2">
+                            {{-- <a class="btn btn-sm btn-warning me-2">
                                 <i class="fas fa-print"></i>
-                            </a>
+                            </a> --}}
                             
                         </div>
                     </td>
