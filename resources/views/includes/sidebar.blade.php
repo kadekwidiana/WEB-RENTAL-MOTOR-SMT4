@@ -150,6 +150,23 @@
                             </a>
                         </nav>
                     </div>
+
+                    {{-- daftar pesan --}}
+                <div class="mb-5">
+                    <div class="sb-sidenav-menu-heading">Message</div>
+                    <a class="nav-link collapsed {{ ($active === "Contact") ? 'active' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#message" aria-expanded="false" aria-controls="message">
+                        <div class="sb-nav-link-icon"><i class="fas fa-solid fa-comment"></i></div>
+                        Pesan
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse mb-5" id="message" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed {{ ($active === "Contact-admin") ? 'active' : '' }}" href="{{ route('contact-admin.index') }}">
+                                Daftar Pesan
+                            </a>
+                        </nav>
+    
+                    </div>  
                 @endcan
                 
                 {{-- OWNER / PEMILIK --}}

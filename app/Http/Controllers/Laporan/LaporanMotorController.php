@@ -45,18 +45,16 @@ class LaporanMotorController extends Controller
 
         // pemasukan dan pengeluaran
 
-        $totalPemasukan = Transaksi::where('status_transaksi', 1)
-            ->whereMonth('tgl_selesai', $bulan)
-            ->whereYear('tgl_selesai', $tahun)
+        $totalPemasukan = Transaksi::whereMonth('tgl_mulai', $bulan)
+            ->whereYear('tgl_mulai', $tahun)
             ->sum('total');
 
         $totalPengeluaran = Pengeluaran::whereMonth('tgl_pengeluaran', $bulan)
             ->whereYear('tgl_pengeluaran', $tahun)
             ->sum('biaya_pengeluaran');
 
-        $jumlahTransaksi = Transaksi::where('status_transaksi', 1)
-            ->whereMonth('tgl_selesai', $bulan)
-            ->whereYear('tgl_selesai', $tahun)
+        $jumlahTransaksi = Transaksi::whereMonth('tgl_mulai', $bulan)
+            ->whereYear('tgl_mulai', $tahun)
             ->count();
 
         $motors = Motor::with(['transaksi', 'pengeluaran'])
@@ -104,8 +102,8 @@ class LaporanMotorController extends Controller
         $tahun;
 
         $motor = Motor::with(['transaksi' => function ($query) use ($bulan, $tahun) {
-            $query->whereMonth('tgl_selesai', $bulan)
-                ->whereYear('tgl_selesai', $tahun);
+            $query->whereMonth('tgl_mulai', $bulan)
+                ->whereYear('tgl_mulai', $tahun);
         }, 'pengeluaran' => function ($query) use ($bulan, $tahun) {
             $query->whereMonth('tgl_pengeluaran', $bulan)
                 ->whereYear('tgl_pengeluaran', $tahun);

@@ -3,8 +3,14 @@
 @section('content')
     <div class="container">
       <div class="orm-group mt-2 mb-2">
-        <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary">Tambah Pengeluaran</a>
-        <a href="{{ route('generate-pdf') }}" class="btn btn-warning">Print <i class="fas fa-print"></i></a>
+        {{-- <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary">Tambah Pengeluaran</a> --}}
+        {{-- <a href="{{ route('generate-pdf') }}" class="btn btn-warning">Print <i class="fas fa-print"></i></a> --}}
+        @can('manajer')
+          <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary mb-3">Tambah pengeluaran</a>
+        @endcan
+        @can('owner')
+          <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary mb-3">Tambah pengeluaran</a>
+        @endcan
       </div>
       
         {{-- filter/pencarian --}}
